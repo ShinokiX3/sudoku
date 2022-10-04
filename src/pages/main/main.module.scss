@@ -1,0 +1,29 @@
+.main {
+    max-width: var(--basic-maxwidth);
+    margin: 0 auto;    
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.plWrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr .5fr;
+}
+
+.gameInfoWrapper {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gameWrapper {
+    display: grid;
+    grid-template-columns: 1fr .4fr;
+}
+
+.info {
+    
+}

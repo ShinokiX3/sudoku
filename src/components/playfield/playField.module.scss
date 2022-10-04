@@ -1,0 +1,18 @@
+.wrapper {
+    border-top: 2px solid #242424;
+    border-left: 2px solid #242424;
+    max-width: fit-content;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    min-height: 45px;
+    border-right: 1px solid #9f9f9f;
+    border-bottom: 1px solid #9f9f9f;
+    &:last-child {
+        border-right: none;
+    }
+}

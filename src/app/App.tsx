@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import MainLayout from './layouts/main/MainLayout';
-import Main from './pages/main/Main';
+import MainLayout from '../layouts/main/MainLayout';
+import Main from '../pages/main/Main';
 
-import './App.css';
-import Tips from './pages/tips/Tips';
+import './App.scss';
+import Tips from '../pages/tips/Tips';
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>

@@ -1,0 +1,85 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a, ul, li, button {
+    text-decoration: none;
+}
+
+// General constants
+
+$basic-border-radius: .2rem;
+
+:root {
+    --basic-maxwidth: 1070px;
+}
+
+// Light theme
+
+$light-button-color: grey;
+$light-button-hover-color: #f1f1f1;
+
+// Dark theme
+
+$dark-font-color: #e0e0e0;
+
+$dark-button-color: #e0e0e0;
+$dark-button-hover-color: #484848;
+
+$dark-background-color: #151515;
+$dark-border-color: white;
+$dark-header-color: #313131;
+
+// Mixins
+
+@mixin basic() {
+    a {
+        border-radius: $basic-border-radius;
+    }
+}
+
+@mixin light_scheme() {
+    a {
+        color: $light-button-color;
+    }
+
+    a:hover {
+        background-color: $light-button-hover-color;
+    }
+}
+
+@mixin dark_scheme() {
+    background-color: $dark-background-color;
+    color: $dark-font-color;
+
+    header {
+        background-color: $dark-header-color;
+        img {
+            filter: invert(.7);
+        }
+    }
+    
+    a {
+        color: $dark-button-color;
+    }
+
+    a:hover {
+        background-color: $dark-button-hover-color;
+    }
+
+    border-color: $dark-border-color;
+}
+
+body {
+    @include basic();
+}
+
+body[data-theme='light'] {
+    @include light_scheme();
+}
+
+body[data-theme='dark'] {
+    @include dark_scheme();
+}
+
