@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.field {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 90px;
+    min-height: 82px;
+
+    border-radius: var(--basic-border-radius);
+    background-color: var(--basic-backgr-color);
+
+    font-size: 27pt;
+    user-select: none;
+    
+    color: var(--basic-numpad-color);
+
+    &:hover {
+        background-color: var(--basic-backgr-color-selected);
+    }
+}

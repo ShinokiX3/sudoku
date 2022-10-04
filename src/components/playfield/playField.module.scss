@@ -10,9 +10,26 @@
     justify-content: center;
     min-width: 45px;
     min-height: 45px;
-    border-right: 1px solid #9f9f9f;
-    border-bottom: 1px solid #9f9f9f;
+    border-right: 1px solid #becee2;
+    border-bottom: 1px solid #becee2;
+
+    font-size: 25pt;
+    color: var(--cell-number-color);
+    user-select: none;
+    
     &:last-child {
         border-right: none;
     }
+}
+
+.selected {
+    background-color: var(--cell-selected-color);
+}
+
+.marked {
+    background-color: var(--cell-marked-color);
+}
+
+.matches {
+    background-color: var(--cell-selected-numbers-color);
 }

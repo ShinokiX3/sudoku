@@ -19,7 +19,7 @@ const Main = () => {
                     </div>
                     <div className={styles.gameWrapper}>
                         <PlayField />
-                        <div>
+                        <div className={styles.controls}>
                             <Controls />
                             <Numbers />
                         </div>

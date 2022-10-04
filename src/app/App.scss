@@ -10,9 +10,22 @@ a, ul, li, button {
 // General constants
 
 $basic-border-radius: .2rem;
+$basic-font-size: 14pt;
 
 :root {
     --basic-maxwidth: 1070px;
+    --basic-border-radius: .2rem;
+    --basic-font-size: 14pt;
+    --basic-font-bold: bold;
+
+    --basic-backgr-color: #eaeef4;
+    --basic-backgr-color-selected: #dce3ed;
+    --basic-numpad-color: #0072e3;
+
+    --cell-selected-color: #bbdefb;
+    --cell-marked-color: #e2ebf3;
+    --cell-number-color: #344861;
+    --cell-selected-numbers-color: #c3d7ea;
 }
 
 // Light theme

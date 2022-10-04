@@ -10,7 +10,7 @@
     margin-bottom: 20px;
     display: grid;
     gap: 20px;
-    grid-template-columns: 1fr .5fr;
+    grid-template-columns: 1fr .45fr;
 }
 
 .gameInfoWrapper {
@@ -21,7 +21,11 @@
 
 .gameWrapper {
     display: grid;
-    grid-template-columns: 1fr .4fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.controls {
+    padding-left: 25px;
 }
 
 .info {
