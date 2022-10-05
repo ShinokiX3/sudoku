@@ -1,4 +1,4 @@
-body {
+body, p {
     margin: 0;
     padding: 0;
 }
@@ -26,6 +26,8 @@ $basic-font-size: 14pt;
     --cell-marked-color: #e2ebf3;
     --cell-number-color: #344861;
     --cell-selected-numbers-color: #c3d7ea;
+
+    --cell-user-numpad-select: #0072e3;
 }
 
 // Light theme

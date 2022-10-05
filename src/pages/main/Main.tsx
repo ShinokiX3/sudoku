@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Controls from '../../components/controls/Controls';
 import Difficulty from '../../components/difficulty/Difficulty';
 import Mistakes from '../../components/mistakes/Mistakes';
@@ -8,6 +8,14 @@ import Timer from '../../components/timer/Timer';
 import styles from './main.module.scss';
 
 const Main = () => {
+    // TODO: change to reudx
+    const [selectedCell, setSelectedCell] = useState<number[]>();
+    const [numpadSelected, setNumpadSelected] = useState<number>(0);
+
+    const handleNumpad = (num: number) => {
+        setNumpadSelected(num);
+    }
+
     return (
         <div className={styles.main}>
             <div className={styles.plWrapper}>
@@ -18,10 +26,10 @@ const Main = () => {
                         <Timer />
                     </div>
                     <div className={styles.gameWrapper}>
-                        <PlayField />
+                        <PlayField numpadSelected={numpadSelected} setNumpadSelected={setNumpadSelected} />
                         <div className={styles.controls}>
                             <Controls />
-                            <Numbers />
+                            <Numbers handleNumpad={handleNumpad} />
                         </div>
                     </div>
                 </div>

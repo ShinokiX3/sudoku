@@ -1,88 +1,68 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { createBaseField } from '../../utils/createBaseField';
-import { setDifficulty } from '../../utils/setDifficulty';
-import { solve } from '../../utils/solve';
-import { sudokuRandomize } from '../../utils/sudokuRandomize';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import styles from './playField.module.scss';
+import { checkIsBorder } from './utils/checkIsBorder';
+import { getRequireStyle } from './utils/getRequireStyle';
+import { isUserSelect } from './utils/isUserSelect';
+import { setMatchesNums } from './utils/setMatchesNums';
+import { Field } from './types';
+import { clearMarkedFields } from './utils/clearMarkedFields';
+import { setMarkedFields } from './utils/setMarkedFields';
+import { setCurrentField, setSolvedField } from '../../redux/field/slice';
+import { selectCurrent, selectSolved } from '../../redux/field/selectors';
+import { createFieldCopy } from './utils/createFieldCopy';
+import { setInitialSudoku } from './utils/setInitialSudoku';
 
-// [
-//     [{viev: 'darker', num: somenum, markNum: somemarknum}]
-// ]
-
-type Field = {
-    viev: 'selected' | 'error' | 'marked' | 'empty' | 'matches';
-    num: number;
-    marks: number[];
+interface PlayFieldProps extends PropsWithChildren {
+    numpadSelected: number | undefined;
+    setNumpadSelected: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const checkIsBorder = (i: number) => {
-    return i === 2 || i === 5 || i === 8;
-}
-
-const getRequireStyle = (viev: string): string => {
-    switch(viev) {
-        case 'selected': return styles.selected;
-        case 'marked': return styles.marked;
-        case 'matches': return styles.matches;
-        case 'empty': return '';
-        case 'error': return '';
-        default: return '';
-    }
-}
-
-const PlayField = () => {
-    const [selectedCell, setSelectedCell] = useState<number[]>();
-    const [solvedSudoku, setSolvedSudoku] = useState<number[][]>();
-    const [sudoku, setSudoku] = useState<Field[][]>();
+const PlayField: React.FunctionComponent<PlayFieldProps> = ({ numpadSelected, setNumpadSelected }) => {
+    const [currentPosition, setCurrentPosition] = useState<number[]>();
+    
+    const dispatch = useDispatch();
+    const solved = useSelector(selectSolved);
+    const sudoku = useSelector(selectCurrent);
 
     useEffect(() => {
-        const initialSudoku: number[][] = createBaseField();
-        const randomizedSudoku: number[][] = sudokuRandomize(initialSudoku, 500);
-        
-        const solvedSudoku: number[][] = randomizedSudoku.map(el => [...el]);
-        const uniqSudoku: number[][] = setDifficulty(randomizedSudoku, 5);
-        
-        const sudoku: Field[][] = uniqSudoku.map(el => el.map(num => ({viev: 'empty', num: num, marks: []})));
-
-        setSolvedSudoku(solvedSudoku)
-        setSudoku(sudoku);
+        const [solvedSudoku, sudoku] = setInitialSudoku(5);
+        dispatch(setSolvedField(solvedSudoku));
+        dispatch(setCurrentField(sudoku));
     }, [])
+
+    useEffect(() => {
+        if (currentPosition) {
+            const [r, c] = currentPosition;
+            if (sudoku && numpadSelected && numpadSelected !== 0 && sudoku[r][c].type === 'user') {
+                const sudokuCopy = createFieldCopy(sudoku);
+                sudokuCopy[r][c].value = sudokuCopy[r][c].value !== numpadSelected ? numpadSelected : 0;
+                
+                clearMarkedFields(sudokuCopy);
+                setMatchesNums(sudokuCopy, r, c);
+                setMarkedFields(sudokuCopy, r, c);
+                
+                dispatch(setCurrentField(sudokuCopy));
+                setNumpadSelected(0);
+            }
+
+        }
+    }, [numpadSelected])
     
     const handleSelect = (e: React.MouseEvent<HTMLDivElement>) => {
         const target = (e.target as HTMLDivElement);
         const [i, j]: number[] = target.getAttribute('data-coord')?.split(';').map(el => +el)!;
 
         if (sudoku) {
-            console.log(sudoku[i][j]);
-            const sudokuCopy: Field[][] = sudoku.map(el => [...el]);
+            const sudokuCopy = createFieldCopy(sudoku);
             
-            for (let r = 0; r < sudokuCopy.length; r++) {
-                for (let c = 0; c < sudokuCopy.length; c++) {
-                    sudokuCopy[r][c].viev = 'empty';
-                }
-            }
+            clearMarkedFields(sudokuCopy);
+            setMarkedFields(sudokuCopy, i, j);
+            setMatchesNums(sudokuCopy, i, j);
 
-            for (let x = 0; x < sudokuCopy.length; x++) {
-                sudokuCopy[i][x].viev = 'marked';
-            }
-
-            for (let x = 0; x < sudokuCopy.length; x++) {
-                sudokuCopy[x][j].viev = 'marked';
-            }
-
-            if (sudokuCopy[i][j].num !== 0) {
-                for (let r = 0; r < sudokuCopy.length; r++) {
-                    for (let c = 0; c < sudokuCopy.length; c++) {
-                        if (sudokuCopy[r][c].num === sudokuCopy[i][j].num) 
-                            sudokuCopy[r][c].viev = 'matches';
-                    }
-                }
-            }
-
-            sudokuCopy[i][j].viev = 'selected'; 
-
-            setSelectedCell([i, j]);
-            setSudoku(sudokuCopy);
+            setCurrentPosition([i, j]);
+            dispatch(setCurrentField(sudokuCopy));
         }
     }
 
@@ -94,14 +74,14 @@ const PlayField = () => {
                     ? {display: 'flex', borderBottom: '2px solid'} 
                     : {display: 'flex'}}
                 >
-                    {row.map(({viev, num, marks}: Field, j) => 
+                    {row.map(({view, value, marks, type}: Field, j) => 
                         <div 
                             data-coord={`${i};${j}`}
                             onClick={handleSelect}
+                            className={styles.cell + ' ' + getRequireStyle(view) + ' ' + isUserSelect(type)}
                             style={checkIsBorder(j) ? {borderRight: '2px solid'} : {}} 
-                            className={styles.cell + ' ' + getRequireStyle(viev)}
                         >
-                            {num === 0 ? <></> : num}
+                            {value === 0 ? <></> : value}
                         </div>
                     )}
                 </div>)
