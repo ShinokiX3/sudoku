@@ -22,12 +22,18 @@ $basic-font-size: 14pt;
     --basic-backgr-color-selected: #dce3ed;
     --basic-numpad-color: #0072e3;
 
+    --cell-min-width: 45px;
+    --cell-min-height: 45px;
+
     --cell-selected-color: #bbdefb;
     --cell-marked-color: #e2ebf3;
     --cell-number-color: #344861;
     --cell-selected-numbers-color: #c3d7ea;
 
     --cell-user-numpad-select: #0072e3;
+
+    --solved-border-radius: .8rem;
+    --solved-background: #0072e3 radial-gradient(circle at 50% 0,#82ffff,#0072e3 53%);
 }
 
 // Light theme

@@ -4,20 +4,37 @@ import undo from '../../assets/svg/undo.svg';
 import erase from '../../assets/svg/erase.svg';
 import notes from '../../assets/svg/notes.svg';
 import hint from '../../assets/svg/hint.svg';
-import { undoField } from '../../redux/field/slice';
+import { setCurrentField, undoField } from '../../redux/field/slice';
+import { selectCurrent, selectPosition, selectSolved } from '../../redux/field/selectors';
+import { createFieldCopy } from '../playfield/utils/createFieldCopy';
+import { setMatchesNums } from '../playfield/utils/setMatchesNums';
 
 const Controls = () => {
     const dispatch = useDispatch();
+    const sudoku = useSelector(selectCurrent);
+    const solved = useSelector(selectSolved);
+    const position = useSelector(selectPosition);
 
     const handler = () => {
         console.log('handling...');
     }
 
     // get history length;
+    // remove required param
 
     const handleUndo = () => {
-        // remove required param
         dispatch(undoField(''));
+    }
+
+    const handleHint = () => {
+        if (position && sudoku && solved) {
+            const [r, c] = position;
+            const sudokuCopy = createFieldCopy(sudoku);
+            sudokuCopy[r][c].value = solved[r][c];
+            
+            setMatchesNums(sudokuCopy, r, c);
+            dispatch(setCurrentField(sudokuCopy));
+        }
     }
 
     return (
@@ -27,7 +44,7 @@ const Controls = () => {
                 <Control title='Undo' callback={handleUndo} ico={undo} />
                 <Control title='Erase' callback={handler} ico={erase} />
                 <Control title='Notes' callback={handler} ico={notes} />
-                <Control title='Hint' callback={handler} ico={hint} />
+                <Control title='Hint' callback={handleHint} ico={hint} />
             </div>
         </div>
     );

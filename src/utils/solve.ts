@@ -1,10 +1,3 @@
-// let input = [
-//     [4, 0, 1, 0],
-//     [0, 2, 0, 0],
-//     [0, 0, 3, 0],
-//     [0, 0, 2, 0],
-// ]
-
 export const solve = (arr: number[][]) => {
     const newArr = arr.map(el => [...el]);
     

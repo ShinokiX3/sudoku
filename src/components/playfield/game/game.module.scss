@@ -1,0 +1,41 @@
+.wrapper {
+    border-top: 2px solid #242424;
+    border-left: 2px solid #242424;
+    max-width: fit-content;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    min-width: var(--cell-min-width);
+    min-height: var(--cell-min-height);
+
+    border-right: 1px solid #becee2;
+    border-bottom: 1px solid #becee2;
+
+    font-size: 25pt;
+    color: var(--cell-number-color);
+    user-select: none;
+    
+    &:last-child {
+        border-right: none;
+    }
+}
+
+.selected {
+    background-color: var(--cell-selected-color);
+}
+
+.marked {
+    background-color: var(--cell-marked-color);
+}
+
+.matches {
+    background-color: var(--cell-selected-numbers-color);
+}
+
+.selectedByUser {
+    color: var(--cell-user-numpad-select);
+}
