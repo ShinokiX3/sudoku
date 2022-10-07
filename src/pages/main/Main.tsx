@@ -1,3 +1,4 @@
+import AppTeaser from '../../components/appteaser/AppTeaser';
 import Controls from '../../components/controls/Controls';
 import Difficulty from '../../components/difficulty/Difficulty';
 import Mistakes from '../../components/mistakes/Mistakes';
@@ -24,9 +25,9 @@ const Main = () => {
                         </div>
                     </div>
                 </div>
-                <div className={styles.additional}>
-                    Something additional
-                </div>
+                <aside className={styles.additional}>
+                    <AppTeaser />
+                </aside>
             </div>
             <div className={styles.info}>
                 Easy Sudoku for beginners

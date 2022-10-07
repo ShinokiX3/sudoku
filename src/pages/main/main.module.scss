@@ -10,7 +10,8 @@
     margin-bottom: 20px;
     display: grid;
     gap: 20px;
-    grid-template-columns: 1fr .45fr;
+    // grid-template-columns: 1fr .45fr;
+    grid-template-columns: 1fr 1fr;
 }
 
 .gameInfoWrapper {
@@ -28,6 +29,6 @@
     padding-left: 25px;
 }
 
-.info {
-    
+.additional {
+    width: 100%;
 }

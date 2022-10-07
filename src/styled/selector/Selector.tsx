@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import styles from './selector.module.scss';
 
-const Selector = () => {
+type SelectorProps = {
+    children: ReactNode,
+    active: boolean
+}
+
+const Selector: React.FunctionComponent<SelectorProps> = ({ children, active }) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            {active 
+                ? <div className={styles.wrapper}>{children}</div>
+                : null
+            }
+        </>
     );
 };
 

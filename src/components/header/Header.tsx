@@ -11,11 +11,8 @@ type TLink = {
 const headerLinks: TLink[] = [
     {title: 'Event', path: '/event'},
     {title: 'Awards', path: '/awards'},
-    {title: 'Daily Challenge', path: '/dailychallenge'},
-    {title: 'Classic', path: 'none'},
     {title: 'Rules', path: '/rules'},
     {title: 'Tips', path: '/tips'},
-    {title: 'C', path: '/event'},
 ];
 
 const Header = () => {

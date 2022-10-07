@@ -1,3 +1,15 @@
+body[data-theme='light'] {
+    .control span {
+        color: var(--basic-numpad-color);
+    }
+}
+
+body[data-theme='dark'] {
+    .control span {
+        color: var(--basic-numpad-color-dark);
+    }
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -39,21 +51,5 @@
         margin-top: 5px;
         font-size: 10pt;
         color: var(--basic-numpad-color);
-    }
-}
-
-.newGame {
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 19px 30px 19px 30px;
-    width: calc(100%);
-    background-color: rgb(104, 104, 253);
-    border-radius: var(--basic-border-radius);
-    font-size: var(--basic-font-size);
-    font-weight: var(--basic-font-bold);
-    
-    &:hover {
-        background-color: #4747ff;
     }
 }

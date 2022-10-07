@@ -14,31 +14,48 @@ $basic-font-size: 14pt;
 
 :root {
     --basic-maxwidth: 1070px;
-    --basic-border-radius: .2rem;
+    --basic-border-radius: .3rem;
+
     --basic-font-size: 14pt;
     --basic-font-bold: bold;
 
+    --small-font-size: 10pt;
+
     --basic-backgr-color: #eaeef4;
     --basic-backgr-color-selected: #dce3ed;
+    --basic-backgr-selected-dark: #d9d9d9;
     --basic-numpad-color: #0072e3;
+
+    --lighter-color: #7e8b99;
 
     --cell-min-width: 45px;
     --cell-min-height: 45px;
 
     --cell-selected-color: #bbdefb;
+    --cell-selected-color-dark: #000000;
+
     --cell-marked-color: #e2ebf3;
     --cell-number-color: #344861;
+
     --cell-selected-numbers-color: #c3d7ea;
+    --cell-selected-num-color-dark: #000000;
 
     --cell-user-numpad-select: #0072e3;
 
+    --cell-background-ligth: white;
+    --cell-background-dark: #f3f6fa;
+
+    --basic-numpad-color-dark: #e0e0e0;
+
     --solved-border-radius: .8rem;
     --solved-background: #0072e3 radial-gradient(circle at 50% 0,#82ffff,#0072e3 53%);
+
+    --diff-select-color: #f3f6fa;
 }
 
 // Light theme
 
-$light-button-color: grey;
+$light-button-color: #6e7c8c;
 $light-button-hover-color: #f1f1f1;
 
 // Dark theme
@@ -56,6 +73,7 @@ $dark-header-color: #313131;
 
 @mixin basic() {
     a {
+        font-weight: 550;
         border-radius: $basic-border-radius;
     }
 }

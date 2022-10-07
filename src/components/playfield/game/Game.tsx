@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field } from '../types';
-// import styles from '../playField.module.scss';
 import styles from './game.module.scss';
 
 import { selectCurrent, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
@@ -60,16 +59,13 @@ const Game = () => {
     return (
         <div className={styles.wrapper}>
             {sudoku ? sudoku.map((row, i) => 
-                <div style={checkIsBorder(i) 
-                    ? {display: 'flex', borderBottom: '2px solid'} 
-                    : {display: 'flex'}}
-                >
+                <div className={checkIsBorder(i) ? styles.borderBottom + ' ' + styles.rowWrapper : styles.rowWrapper}>
                     {row.map(({view, value, marks, type}: Field, j) => 
                         <div 
                             data-coord={`${i};${j}`}
                             onClick={handleSelect}
                             className={styles.cell + ' ' + getRequireStyle(view) + ' ' + isUserSelect(type)}
-                            style={checkIsBorder(j) ? {borderRight: '2px solid'} : {}} 
+                            style={checkIsBorder(j) ? {borderRight: '2px solid #344861'} : {}} 
                         >
                             {value === 0 ? <></> : value}
                         </div>

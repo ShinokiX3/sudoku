@@ -5,6 +5,7 @@
     background: var(--solved-background);
     position: relative;
     overflow: hidden;
+    user-select: none;
 }
 
 .winscreen {
@@ -19,6 +20,7 @@
 .light1, .light2, .light3 {
     position: absolute;
     width: calc(var(--cell-min-width) * 10);
+    pointer-events: none;
 }
 
 .light1 {
@@ -81,6 +83,17 @@
             font-weight: bold;
             justify-self: end;
         }
+    }
+
+    animation: congraz .7s ease-in-out 0s 1 normal forwards;
+}
+
+@keyframes congraz {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 

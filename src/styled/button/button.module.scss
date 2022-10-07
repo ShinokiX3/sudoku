@@ -1,0 +1,35 @@
+.basic {
+    border: none;
+    cursor: pointer;
+    width: calc(100%);
+    border-radius: var(--basic-border-radius);
+}
+
+.bigger {
+    font-size: var(--basic-font-size);
+    font-weight: var(--basic-font-bold);
+    padding: 19px 30px 19px 30px;
+}
+
+.smaller {
+    font-size: var(--small-font-size);
+    font-weight: var(--basic-font-bold);
+    padding: 10px 15px 10px 15px;
+}
+
+.blue {
+    color: white;
+    background-color: #0071e3;
+    &:hover {
+        background-color: #0066cd;
+    }
+}
+
+.white {
+    color: #857c8c;
+    background-color: white;
+    border: 1px solid #eff3fb;
+    &:hover {
+        background-color: #f3f6fa;
+    }
+}

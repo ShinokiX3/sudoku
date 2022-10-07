@@ -8,9 +8,16 @@ import { setCurrentField, undoField } from '../../redux/field/slice';
 import { selectCurrent, selectPosition, selectSolved } from '../../redux/field/selectors';
 import { createFieldCopy } from '../playfield/utils/createFieldCopy';
 import { setMatchesNums } from '../playfield/utils/setMatchesNums';
+import Selector from '../../styled/selector/Selector';
+import NewGame from '../newGameSelector/NewGame';
+import { useState } from 'react';
+import Button from '../../styled/button/Button';
 
 const Controls = () => {
+    const [active, setActive] = useState<boolean>(false);
+
     const dispatch = useDispatch();
+    
     const sudoku = useSelector(selectCurrent);
     const solved = useSelector(selectSolved);
     const position = useSelector(selectPosition);
@@ -36,10 +43,20 @@ const Controls = () => {
             dispatch(setCurrentField(sudokuCopy));
         }
     }
+    
+    const handleNewGame = () => {
+        setActive(!active);
+    }
 
     return (
         <div className={styles.wrapper}>
-            <button className={styles.newGame}>New Game</button>
+            <div style={{position: 'relative'}}>
+                {/* <button onClick={handleNewGame} className={styles.newGame}>New Game</button> */}
+                <Button text='New Game' stylish='blue' callback={handleNewGame} />
+                <Selector active={active}>
+                    <NewGame />
+                </Selector>
+            </div>
             <div className={styles.controls}>
                 <Control title='Undo' callback={handleUndo} ico={undo} />
                 <Control title='Erase' callback={handler} ico={erase} />
@@ -51,9 +68,16 @@ const Controls = () => {
 };
 
 // need to set type for callback
-const Control = ({title, callback, ico}: {title: string, callback: Function, ico: string}) => {
+
+type TControl = {
+    title: string;
+    callback: Function;
+    ico: string;
+}
+
+const Control = ({title, callback, ico}: TControl) => {
     return (
-        <div className={styles.control} onClick={() => callback()}>
+        <div onClick={() => callback()} className={styles.control}>
             <img src={ico} alt={title} />
             <span>{title}</span>
         </div>

@@ -1,3 +1,10 @@
+body[data-theme='dark'] {
+    .cell {
+        background-color: var(--cell-background-dark);
+    }
+}
+
+
 .wrapper {
     border-top: 2px solid #242424;
     border-left: 2px solid #242424;
@@ -38,4 +45,17 @@
 
 .selectedByUser {
     color: var(--cell-user-numpad-select);
+}
+
+.rowWrapper {
+    display: flex;
+}
+
+.borderBottom {
+    border-color: #344861!important;
+    border-bottom: 2px solid;
+}
+
+.borderRight {
+    border-right: 2px solid;
 }

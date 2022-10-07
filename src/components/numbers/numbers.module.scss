@@ -1,3 +1,19 @@
+body[data-theme='light'] {
+    .field {
+        color: var(--basic-numpad-color);
+    }
+}
+
+body[data-theme='dark'] {
+    .field {
+        color: black;
+        background-color: var(--cell-background-dark);
+        &:hover {
+            background-color: var(--basic-backgr-selected-dark);
+        }
+    }
+}
+
 .wrapper {
     width: 100%;
     display: grid;
