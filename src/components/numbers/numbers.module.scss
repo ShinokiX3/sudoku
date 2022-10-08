@@ -39,7 +39,45 @@ body[data-theme='dark'] {
     
     color: var(--basic-numpad-color);
 
+    transition: background-color .3s ease;
+    
     &:hover {
         background-color: var(--basic-backgr-color-selected);
+    }
+}
+
+@media (max-width: 1070px) {
+    .control {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .field {
+        min-width: auto;
+        min-height: 77px;
+    }
+}
+
+@media (max-width: 770px) {
+    .control {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+    .field {
+        min-width: auto;
+        min-height: 82px;
+    }
+}
+
+@media (max-width: 750px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: none;
+        .field {
+            font-size: 60pt;
+            background-color: transparent;
+        }
     }
 }

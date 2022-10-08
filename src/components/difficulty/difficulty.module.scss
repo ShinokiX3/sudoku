@@ -1,0 +1,31 @@
+.wrapper {
+    display: flex;
+    font-size: 12.5pt;
+    user-select: none;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.value {
+    cursor: pointer;
+    position: relative;
+    margin-left: 10px;
+    font-weight: bold;
+    color: var(--light-settings-color);
+}
+
+.content {
+    padding: 5px 0px;
+}
+
+.item {
+    min-width: 100px;
+    color: #6e7c8c;
+    font-weight: 525;
+    padding: 8px 15px;
+    &:hover {
+        background-color: #f3f6fa;
+    }
+}

@@ -59,3 +59,31 @@ body[data-theme='dark'] {
 .borderRight {
     border-right: 2px solid;
 }
+
+@media (max-width: 1070px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 0px);
+        min-height: calc(var(--cell-min-height) - 0px);
+    }
+}
+
+@media (max-width: 976px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 7px);
+        min-height: calc(var(--cell-min-height) - 7px);
+    }
+}
+
+@media (max-width: 770px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 5px);
+        min-height: calc(var(--cell-min-height) - 5px);
+    }
+}
+
+@media (max-width: 750px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) + 8px);
+        min-height: calc(var(--cell-min-height) + 8px);
+    }
+}

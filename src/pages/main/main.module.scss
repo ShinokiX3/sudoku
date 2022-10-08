@@ -6,23 +6,29 @@
 }
 
 .plWrapper {
+    width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
     display: grid;
     gap: 20px;
-    // grid-template-columns: 1fr .45fr;
     grid-template-columns: 1fr 1fr;
+}
+
+.playground {
+    width: 100%;
 }
 
 .gameInfoWrapper {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .gameWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 100%;
 }
 
 .controls {
@@ -31,4 +37,30 @@
 
 .additional {
     width: 100%;
+}
+
+@media (max-width: 1070px) {
+    .controls {
+        width: 30vw;
+    }
+}
+
+@media (max-width: 770px) {
+    .plWrapper {
+        grid-template-columns: 1fr;
+    }
+    .controls {
+        width: 40vw;
+    }
+}
+
+@media (max-width: 750px) {
+    .gameWrapper {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    .controls {
+        padding-left: 0;
+        width: calc(calc(var(--cell-min-width) + 8px) * 9);
+    }
 }

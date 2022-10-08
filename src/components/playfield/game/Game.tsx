@@ -46,6 +46,7 @@ const Game = () => {
         const [i, j]: number[] = target.getAttribute('data-coord')?.split(';').map(el => +el)!;
 
         if (sudoku) {
+            // TODO: compose functions
             const sudokuCopy = createFieldCopy(sudoku);
             clearMarkedFields(sudokuCopy);
             setMarkedFields(sudokuCopy, i, j);

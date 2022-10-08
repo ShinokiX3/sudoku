@@ -50,8 +50,7 @@ const Controls = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div style={{position: 'relative'}}>
-                {/* <button onClick={handleNewGame} className={styles.newGame}>New Game</button> */}
+            <div className={styles.ngButton}>
                 <Button text='New Game' stylish='blue' callback={handleNewGame} />
                 <Selector active={active}>
                     <NewGame />

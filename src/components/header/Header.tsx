@@ -1,7 +1,10 @@
-import logo from '../../assets/svg/logo.svg';
-import LinkButton from '../../styled/linkButton/LinkButton';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './header.module.scss';
+
+import LinkButton from '../../styled/linkButton/LinkButton';
+import logo from '../../assets/svg/logo.svg';
+import dark from '../../assets/svg/dark.svg';
 
 type TLink = {
     title: string;
@@ -16,13 +19,17 @@ const headerLinks: TLink[] = [
 ];
 
 const Header = () => {
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
     // Temporary solution
     const handleTheme = () => {
-        const body = document.querySelector('body')!;
-        if (body.getAttribute('data-theme') === 'light') {
-            body.setAttribute('data-theme', 'dark');
-        } else body.setAttribute('data-theme', 'light');
+        setTheme(theme === 'light' ? 'dark' : 'light');
     }
+
+    useEffect(() => {
+        const body = document.querySelector('body')!;
+        body.setAttribute('data-theme', theme);
+    }, [theme])
 
     return (
         <header className={styles.header}>
@@ -34,7 +41,9 @@ const Header = () => {
                 </div>
                 <nav>{headerLinks.map(({title, path}: TLink) => 
                     <LinkButton path={path} title={title}/>)}
-                    <span style={{cursor: 'pointer'}} onClick={handleTheme}>Theme</span>
+                    <div className={styles.theme} onClick={handleTheme}>
+                        <img src={dark} alt="light theme" /> 
+                    </div>
                 </nav>
             </div>
         </header>

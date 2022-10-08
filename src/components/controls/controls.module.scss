@@ -10,6 +10,10 @@ body[data-theme='dark'] {
     }
 }
 
+.ngButton {
+    position: relative;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -20,27 +24,30 @@ body[data-theme='dark'] {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
-    display: flex;
-    
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 57px));
+
+
     justify-content: space-between;
     align-items: center;
 }
 
 .control {
+    width: 57px;
+    height: 62px;
+
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-items: center;
-
-    width: 57px;
-    height: 62px;
     padding-bottom: 5px;
 
     img {
-        width: 26px;
+        cursor: pointer;
         padding: 15px;
         background-color: var(--basic-backgr-color);
-        cursor: pointer;
+        transition: background-color .3s ease;
         &:hover {
             background-color: var(--basic-backgr-color-selected);
         }
@@ -51,5 +58,17 @@ body[data-theme='dark'] {
         margin-top: 5px;
         font-size: 10pt;
         color: var(--basic-numpad-color);
+    }
+}
+
+@media (max-width: 1070px) {    
+    .controls {
+        margin-bottom: 33px;
+    }
+}
+
+@media (max-width: 976px) {
+    .ngButton {
+        display: none;
     }
 }

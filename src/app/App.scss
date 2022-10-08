@@ -26,10 +26,13 @@ $basic-font-size: 14pt;
     --basic-backgr-selected-dark: #d9d9d9;
     --basic-numpad-color: #0072e3;
 
+    --light-settings-color: #94a3b7;
+
     --lighter-color: #7e8b99;
 
     --cell-min-width: 45px;
     --cell-min-height: 45px;
+    
 
     --cell-selected-color: #bbdefb;
     --cell-selected-color-dark: #000000;
@@ -75,6 +78,11 @@ $dark-header-color: #313131;
     a {
         font-weight: 550;
         border-radius: $basic-border-radius;
+        transition: background-color .2s ease;
+    }
+    
+    button {
+        transition: background-color .2s ease;
     }
 }
 
