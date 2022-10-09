@@ -40,7 +40,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <nav>{headerLinks.map(({title, path}: TLink) => 
-                    <LinkButton path={path} title={title}/>)}
+                    <LinkButton key={title} path={path} title={title}/>)}
                     <div className={styles.theme} onClick={handleTheme}>
                         <img src={dark} alt="light theme" /> 
                     </div>

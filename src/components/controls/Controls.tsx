@@ -12,6 +12,7 @@ import Selector from '../../styled/selector/Selector';
 import NewGame from '../newGameSelector/NewGame';
 import { useState } from 'react';
 import Button from '../../styled/button/Button';
+import { clearMatchesNums } from '../playfield/utils/clearMatchesNums';
 
 const Controls = () => {
     const [active, setActive] = useState<boolean>(false);
@@ -33,11 +34,26 @@ const Controls = () => {
         dispatch(undoField(''));
     }
 
+    const handleErase = () => {
+        if (position && sudoku && solved) {
+            const [r, c] = position;
+            const sudokuCopy = createFieldCopy(sudoku);
+
+            if (sudokuCopy[r][c].type === 'user') {
+                clearMatchesNums(sudokuCopy, r, c);
+                sudokuCopy[r][c].value = 0;
+                dispatch(setCurrentField(sudokuCopy));
+            }
+        }
+    }
+
     const handleHint = () => {
         if (position && sudoku && solved) {
             const [r, c] = position;
             const sudokuCopy = createFieldCopy(sudoku);
+
             sudokuCopy[r][c].value = solved[r][c];
+            sudokuCopy[r][c].type = 'initial';
             
             setMatchesNums(sudokuCopy, r, c);
             dispatch(setCurrentField(sudokuCopy));
@@ -53,12 +69,12 @@ const Controls = () => {
             <div className={styles.ngButton}>
                 <Button text='New Game' stylish='blue' callback={handleNewGame} />
                 <Selector active={active}>
-                    <NewGame />
+                    <NewGame setActive={setActive} />
                 </Selector>
             </div>
             <div className={styles.controls}>
                 <Control title='Undo' callback={handleUndo} ico={undo} />
-                <Control title='Erase' callback={handler} ico={erase} />
+                <Control title='Erase' callback={handleErase} ico={erase} />
                 <Control title='Notes' callback={handler} ico={notes} />
                 <Control title='Hint' callback={handleHint} ico={hint} />
             </div>

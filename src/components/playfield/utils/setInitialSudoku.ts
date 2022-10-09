@@ -4,7 +4,7 @@ import { sudokuRandomize } from "../../../utils/sudokuRandomize";
 import { Field } from "../types"
 
 
-export const setInitialSudoku = (diff: number = 5): [number[][], Field[][]] => {
+export const setInitialSudoku = (diff: number): [number[][], Field[][]] => {
     const uniqSudoku: number[][] = sudokuRandomize(createBaseField(), 500);
     const solvedSudoku: number[][] = uniqSudoku.map(el => [...el]);
     const diffedSudoku: number[][] = setDifficulty(uniqSudoku, diff);

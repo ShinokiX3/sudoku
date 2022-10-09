@@ -14,7 +14,7 @@ const Numbers = () => {
     return (
         <div className={styles.wrapper}>
             {arr.map((num) => 
-                <div className={styles.field} onClick={() => handleNumpad(num)}>
+                <div key={num} className={styles.field} onClick={() => handleNumpad(num)}>
                     {num}
                 </div>
             )}

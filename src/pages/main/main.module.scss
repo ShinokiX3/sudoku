@@ -39,6 +39,25 @@
     width: 100%;
 }
 
+.info {
+    cursor: default;
+    margin-top: 50px;
+    width: 100%;
+
+    p {
+        margin: 1em 0;
+        color: #6e7c8c;
+    }
+
+    h2 {
+        color: #344861;
+        margin: 0.83em 0;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.31;
+    }
+}
+
 @media (max-width: 1070px) {
     .controls {
         width: 30vw;
@@ -59,6 +78,7 @@
         grid-template-columns: 1fr;
         justify-items: center;
     }
+
     .controls {
         padding-left: 0;
         width: calc(calc(var(--cell-min-width) + 8px) * 9);

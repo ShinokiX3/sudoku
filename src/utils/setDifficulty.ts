@@ -12,12 +12,20 @@ const findNulls = (arr: number[][], size: number) => {
 
 export const setDifficulty = (arr: number[][], diff: number): number[][] => {
     const size = arr.length;
-
-    // set type for stash
+    // TODO: set type for stash
     const stash: any = {};
-    
-    // calc diff ? 4; 2-4;
-    for (let i = 0; i < 65; i++) {
+
+    let gameDiff = 0;
+    switch(diff) {
+        case 1: gameDiff = 50; break;
+        case 2: gameDiff = 55; break;
+        case 3: gameDiff = 60; break;
+        case 4: gameDiff = 65; break;
+        case 5: gameDiff = 70; break;
+        default: gameDiff = 55;
+    }
+
+    for (let i = 0; i < gameDiff; i++) {
         const r = getRandomNumber(0, size - 1);
         const c = getRandomNumber(0, size - 1);
 

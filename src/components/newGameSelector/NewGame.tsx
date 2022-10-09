@@ -4,11 +4,13 @@ import styles from './ngSeletor.module.scss';
 import sudoku from '../../assets/images/sudoku.png';
 import restart from '../../assets/images/restart.png';
 import Button from '../../styled/button/Button';
+import { setInitialSudoku } from '../playfield/utils/setInitialSudoku';
+import { useDispatch } from 'react-redux';
+import { restartGame, setCurrentField, setSolvedField, setToInitial } from '../../redux/field/slice';
 
 type Diff = {
     title: string;
     ico: string;
-    callback?: Function;
 }
 
 const diffVars: Diff[] = [
@@ -16,11 +18,46 @@ const diffVars: Diff[] = [
     {title: 'Medium', ico: sudoku},
     {title: 'Hard', ico: sudoku},
     {title: 'Expert', ico: sudoku},
-    {title: 'Evil', ico: sudoku},
-    {title: 'Restart', ico: restart},
-]
+    {title: 'Evil', ico: sudoku}
+];
 
-const NewGame = () => {
+type TNewGame = {
+    setActive: Function;
+}
+
+const NewGame: React.FunctionComponent<TNewGame> = ({ setActive }) => {
+    const dispatch = useDispatch();
+
+    const handleDifficult = (diff: string) => {
+        // TODO: create global function that can set new sudoku field and clear localstorage
+        let gameDiff = 0;
+
+        switch(diff) {
+            case 'Easy': gameDiff = 1; break;
+            case 'Normal': gameDiff = 2; break;
+            case 'Hard': gameDiff = 3; break;
+            case 'Expert': gameDiff = 4; break;
+            case 'Evil': gameDiff = 5; break;
+            default: gameDiff = 2; break;
+        }
+
+        const [solvedSudoku, sudoku] = setInitialSudoku(gameDiff);
+        // TODO: Make payload optional
+        
+        dispatch(setToInitial(''));
+        dispatch(setSolvedField(solvedSudoku));
+        dispatch(setCurrentField(sudoku));
+
+        localStorage.removeItem('sudoku');
+        localStorage.removeItem('solved');
+
+        setActive(false);
+    }
+
+    const handleRestart = () => {
+        dispatch(restartGame(''));
+    }
+    
     return (
         <div>
             <div className={styles.variants}>
@@ -34,15 +71,20 @@ const NewGame = () => {
                 </div>
             </div>
             <div className={styles.difficulty}>
-                {diffVars.map(({title, ico}) => <DiffElement title={title} ico={ico} />)}
+                {diffVars.map(({title, ico}) => 
+                    <DiffElement key={title} title={title} ico={ico} callback={handleDifficult} />
+                )}
+                <DiffElement title='Restart' ico={restart} callback={handleRestart} />
             </div>
         </div>
     );
 };
 
-const DiffElement = ({ title, ico, callback }: Diff) => {
+type TDiffElement = Diff & { callback: Function }
+
+const DiffElement: React.FunctionComponent<TDiffElement> = ({ title, ico, callback }) => {
     return (
-        <div className={styles.difficult}>
+        <div onClick={() => callback(title)} className={styles.difficult}>
             <img src={ico} alt={title} />
             <p>{title}</p>
         </div>

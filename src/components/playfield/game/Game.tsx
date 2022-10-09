@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field } from '../types';
 import styles from './game.module.scss';
 
-import { selectCurrent, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
+import { selectCurrent, selectGameStatus, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
 import { setCurrentField, setGameStatus, setPosition } from '../../../redux/field/slice';
 import { checkIsBorder } from '../utils/checkIsBorder';
 import { checkStatus } from '../utils/checkStatus';
@@ -20,6 +20,7 @@ const Game = () => {
     const sudoku = useSelector(selectCurrent);
     const position = useSelector(selectPosition);
 
+    const status = useSelector(selectGameStatus);
     const numpad = useSelector(selectNumpad);
     const numpadHandle = useSelector(selectNumpadHandle);
 
@@ -41,6 +42,17 @@ const Game = () => {
         }
     }, [numpadHandle]);
 
+    useEffect(() => {
+        if (sudoku) {
+            const currentJSON = JSON.stringify(sudoku);
+            localStorage.setItem('sudoku', currentJSON);
+            if (localStorage.getItem('solved') === 'null' || !localStorage.getItem('solved')) {
+                const solvedJSON = JSON.stringify(solved);
+                localStorage.setItem('solved', solvedJSON);
+            }
+        }
+    }, [sudoku])
+
     const handleSelect = (e: React.MouseEvent<HTMLDivElement>) => {
         const target = (e.target as HTMLDivElement);
         const [i, j]: number[] = target.getAttribute('data-coord')?.split(';').map(el => +el)!;
@@ -60,15 +72,15 @@ const Game = () => {
     return (
         <div className={styles.wrapper}>
             {sudoku ? sudoku.map((row, i) => 
-                <div className={checkIsBorder(i) ? styles.borderBottom + ' ' + styles.rowWrapper : styles.rowWrapper}>
+                <div key={i} className={checkIsBorder(i) ? styles.borderBottom + ' ' + styles.rowWrapper : styles.rowWrapper}>
                     {row.map(({view, value, marks, type}: Field, j) => 
-                        <div 
+                        <div key={j}
                             data-coord={`${i};${j}`}
                             onClick={handleSelect}
-                            className={styles.cell + ' ' + getRequireStyle(view) + ' ' + isUserSelect(type)}
+                            className={styles.cell + ' ' + getRequireStyle(status === 'paused' ? '' : view) + ' ' + isUserSelect(type)}
                             style={checkIsBorder(j) ? {borderRight: '2px solid #344861'} : {}} 
                         >
-                            {value === 0 ? <></> : value}
+                            {value === 0 || status === 'paused' ? <></> : value}
                         </div>
                     )}
                 </div>

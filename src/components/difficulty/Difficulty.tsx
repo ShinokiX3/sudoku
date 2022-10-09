@@ -37,7 +37,7 @@ const Difficulty = () => {
                 <Selector active={active}>
                     <div className={styles.content}>
                         {diffs.map(({title}) => 
-                            <div onClick={() => handleDifficult(title)} className={styles.item}>
+                            <div key={title} onClick={() => handleDifficult(title)} className={styles.item}>
                                 {title}
                             </div>
                         )}
