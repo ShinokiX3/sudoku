@@ -6,3 +6,5 @@ export const selectNumpad = (state: RootState) => state.field.numpad;
 export const selectPosition = (state: RootState) => state.field.position;
 export const selectNumpadHandle = (state: RootState) => state.field.numpadHandle;
 export const selectGameStatus = (state: RootState) => state.field.gameStatus;
+export const selectTime = (state: RootState) => state.field.clock;
+export const selectDifficult = (state: RootState) => state.field.difficult;

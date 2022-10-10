@@ -1,0 +1,29 @@
+.menu {
+    img {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.wrapper {
+    padding: 20px;
+    top: 0;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 30px);
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85%;
+
+    svg, img {
+        cursor: pointer;
+        margin-top: 12px;
+        margin-left: 14px;
+        width: 35px;
+        height: 35px;
+    }
+}

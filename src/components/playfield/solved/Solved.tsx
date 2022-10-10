@@ -8,8 +8,14 @@ import light3 from '../../../assets/images/light1.png';
 
 import difficulty from '../../../assets/svg/difficulty.svg';
 import timer from '../../../assets/svg/timer.svg';
+import { useSelector } from 'react-redux';
+import { selectDifficult, selectTime } from '../../../redux/field/selectors';
+import { formateTime } from '../../timer/utils/formateTime';
 
 const Solved = () => {
+    const clock = useSelector(selectTime);
+    const difficult = useSelector(selectDifficult);
+
     return (
         <div className={styles.wrapper}>
             <img className={styles.winscreen} src={winscreen} alt="winscreen" />
@@ -24,12 +30,12 @@ const Solved = () => {
                     <div style={{borderBottom: '1px solid #2285e7'}}>
                         <img src={difficulty} alt="difficulty" />
                         <p>Difficulty</p>
-                        <p className={styles.statsValue}>Hard</p>
+                        <p className={styles.statsValue}>{difficult}</p>
                     </div>
                     <div>
                         <img src={timer} alt="timer" />
                         <p>Time</p>
-                        <p className={styles.statsValue}>15:00</p>
+                        <p className={styles.statsValue}>{formateTime(clock)}</p>
                     </div>
                 </div>
             </div>

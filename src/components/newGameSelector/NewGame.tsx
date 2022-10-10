@@ -6,7 +6,8 @@ import restart from '../../assets/images/restart.png';
 import Button from '../../styled/button/Button';
 import { setInitialSudoku } from '../playfield/utils/setInitialSudoku';
 import { useDispatch } from 'react-redux';
-import { restartGame, setCurrentField, setSolvedField, setToInitial } from '../../redux/field/slice';
+import { restartGame, setCurrentField, setDifficulty, setSolvedField, setToInitial } from '../../redux/field/slice';
+import useNewGame from '../../hooks/useNewGame';
 
 type Diff = {
     title: string;
@@ -27,30 +28,10 @@ type TNewGame = {
 
 const NewGame: React.FunctionComponent<TNewGame> = ({ setActive }) => {
     const dispatch = useDispatch();
+    const [startNewGame] = useNewGame();
 
     const handleDifficult = (diff: string) => {
-        // TODO: create global function that can set new sudoku field and clear localstorage
-        let gameDiff = 0;
-
-        switch(diff) {
-            case 'Easy': gameDiff = 1; break;
-            case 'Normal': gameDiff = 2; break;
-            case 'Hard': gameDiff = 3; break;
-            case 'Expert': gameDiff = 4; break;
-            case 'Evil': gameDiff = 5; break;
-            default: gameDiff = 2; break;
-        }
-
-        const [solvedSudoku, sudoku] = setInitialSudoku(gameDiff);
-        // TODO: Make payload optional
-        
-        dispatch(setToInitial(''));
-        dispatch(setSolvedField(solvedSudoku));
-        dispatch(setCurrentField(sudoku));
-
-        localStorage.removeItem('sudoku');
-        localStorage.removeItem('solved');
-
+        startNewGame(diff);
         setActive(false);
     }
 
@@ -59,7 +40,7 @@ const NewGame: React.FunctionComponent<TNewGame> = ({ setActive }) => {
     }
     
     return (
-        <div>
+        <div className={styles.wrapper}>
             <div className={styles.variants}>
                 <div className={styles.info}>
                     <p>Select Game Mode</p>

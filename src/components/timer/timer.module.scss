@@ -1,0 +1,25 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+
+    p {
+        font-weight: bold;
+        color: var(--light-settings-color);
+    }
+
+    img {
+        margin-left: 9px;
+        cursor: pointer;
+        width: 14px;
+        height: 14px;
+        padding: 5px 5px;
+        background-color: var(--basic-backgr-color);
+        border-radius: 50%;
+    }
+}
+
+.disable {
+    pointer-events: none;
+}

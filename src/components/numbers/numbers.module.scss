@@ -46,6 +46,13 @@ body[data-theme='dark'] {
     }
 }
 
+.disable {
+    .field {
+        pointer-events: none;
+        color: var(--light-settings-color)!important;
+    }
+}
+
 @media (max-width: 1070px) {
     .control {
         display: grid;
@@ -75,6 +82,7 @@ body[data-theme='dark'] {
         display: grid;
         grid-template-columns: repeat(9, 1fr);
         grid-template-rows: none;
+
         .field {
             font-size: 60pt;
             background-color: transparent;
