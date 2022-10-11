@@ -14,6 +14,10 @@
     background-color: var(--cell-selected-numbers-color);
 }
 
+.error {
+    background-color: var(--cell-error-color);
+}
+
 .selectedByUser {
     color: var(--cell-user-numpad-select)!important;
 }

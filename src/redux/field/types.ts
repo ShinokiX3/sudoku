@@ -9,6 +9,8 @@ export interface FieldSliceState {
     numpad: number | null;
     clock: TTimer;
     difficult: 'Easy' | 'Medium' | 'Hard' | 'Expert' | 'Evil';
-    numpadHandle: boolean;
     gameStatus: 'acting' | 'paused' | 'finished';
+    numpadHandle: boolean;
+    notesStatus: boolean;
+    mistakesAutoCheck: boolean;
 }

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGameStatus } from '../../redux/field/selectors';
+import { selectGameStatus, selectNoteStatus } from '../../redux/field/selectors';
 import { setNumpad } from '../../redux/field/slice';
 import styles from './numbers.module.scss';
 
@@ -8,6 +8,7 @@ const arr: number[] = Array.from({length: 9}, (_, i) => i + 1);
 const Numbers = () => {
     const dispatch = useDispatch();
     const status = useSelector(selectGameStatus);
+    const noteStatus = useSelector(selectNoteStatus);
 
     const handleNumpad = (num: number) => {
         dispatch(setNumpad(num));

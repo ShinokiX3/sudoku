@@ -6,11 +6,13 @@ const initialState: FieldSliceState = {
     history: null,
     current: null,
     solved: null,
-    numpad: null,
+    numpad: null,    
     difficult: 'Hard',
+    gameStatus: 'acting',
     clock: {minutes: 0, seconds: 0},
     numpadHandle: false,
-    gameStatus: 'acting'
+    notesStatus: false,
+    mistakesAutoCheck: false
 }
 
 const fieldSlice = createSlice({
@@ -62,6 +64,12 @@ const fieldSlice = createSlice({
         },
         setDifficulty(state, action) {
             state.difficult = action.payload;
+        },
+        setNotesStatus(state, action) {
+            state.notesStatus = action.payload;
+        },
+        setMistakesAC(state, action) {
+            state.mistakesAutoCheck = action.payload;
         }
     }
 })
@@ -76,7 +84,9 @@ export const {
     setToInitial,
     restartGame,
     setTime,
-    setDifficulty
+    setDifficulty,
+    setNotesStatus,
+    setMistakesAC
 } = fieldSlice.actions;
 
 export default fieldSlice.reducer;

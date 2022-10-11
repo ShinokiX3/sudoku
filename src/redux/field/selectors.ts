@@ -8,3 +8,5 @@ export const selectNumpadHandle = (state: RootState) => state.field.numpadHandle
 export const selectGameStatus = (state: RootState) => state.field.gameStatus;
 export const selectTime = (state: RootState) => state.field.clock;
 export const selectDifficult = (state: RootState) => state.field.difficult;
+export const selectNoteStatus = (state: RootState) => state.field.notesStatus;
+export const selectMistakesAC = (state: RootState) => state.field.mistakesAutoCheck;

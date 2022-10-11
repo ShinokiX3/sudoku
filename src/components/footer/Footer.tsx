@@ -1,5 +1,18 @@
 import styles from './footer.module.scss';
 import facebook from '../../assets/svg/facebook.svg';
+import InfoButton from '../../styled/infoButton/InfoButton';
+
+type Link = {
+    title: string;
+    url: string;
+}
+
+const links: Link[] = [
+    {title: 'Terms', url: '/terms'},
+    {title: 'Coockie Policy', url: '/coockie'},
+    {title: 'Privacy', url: '/privacy'},
+    {title: 'Get in Touch', url: '/getintouch'},
+]
 
 const Footer = () => {
     return (
@@ -11,11 +24,7 @@ const Footer = () => {
                         <span className={styles.rights}>©2018-2022 Easybrain. All Rights Reserved.</span>
                     </div>
                     <div className={styles.links}>
-                        {/* Buttons */}
-                        <p>Terms</p>
-                        <p>Cockie Policy</p>
-                        <p>Privacy</p>
-                        <p>Get in Touch</p>
+                        {links.map(({ title, url }: Link) => <InfoButton key={title} title={title} url={url} />)}
                     </div>
                     <div className={styles.socials}>
                         <img src={facebook} alt="facebook" />

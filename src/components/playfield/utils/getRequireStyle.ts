@@ -5,8 +5,8 @@ export const getRequireStyle = (viev: string): string => {
         case 'selected': return styles.selected;
         case 'marked': return styles.marked;
         case 'matches': return styles.matches;
+        case 'error': return styles.error;
         case 'empty': return '';
-        case 'error': return '';
         default: return '';
     }
 }

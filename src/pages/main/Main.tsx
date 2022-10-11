@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import AppTeaser from '../../components/appteaser/AppTeaser';
 import Controls from '../../components/controls/Controls';
 import Difficulty from '../../components/difficulty/Difficulty';
@@ -9,11 +8,6 @@ import Timer from '../../components/timer/Timer';
 import styles from './main.module.scss';
 
 const Main = () => {
-
-    useEffect(() => {
-        console.log('main');
-    }, [])
-
     return (
         <div className={styles.main}>
             <div className={styles.plWrapper}>

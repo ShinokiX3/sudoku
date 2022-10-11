@@ -1,25 +1,21 @@
+import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentField, setNotesStatus, undoField } from '../../redux/field/slice';
+import { selectCurrent, selectGameStatus, selectNoteStatus, selectPosition, selectSolved } from '../../redux/field/selectors';
 import styles from './controls.module.scss';
-
-import undo from '../../assets/svg/undo.svg';
-import erase from '../../assets/svg/erase.svg';
-import notes from '../../assets/svg/notes.svg';
-import hint from '../../assets/svg/hint.svg';
 
 import { ReactComponent as Undo } from '../../assets/svg/undo.svg';
 import { ReactComponent as Erase } from '../../assets/svg/erase.svg';
 import { ReactComponent as Notes } from '../../assets/svg/notes.svg';
 import { ReactComponent as Hint } from '../../assets/svg/hint.svg';
 
-import { setCurrentField, undoField } from '../../redux/field/slice';
-import { selectCurrent, selectGameStatus, selectPosition, selectSolved } from '../../redux/field/selectors';
 import { createFieldCopy } from '../playfield/utils/createFieldCopy';
 import { setMatchesNums } from '../playfield/utils/setMatchesNums';
+import { clearMatchesNums } from '../playfield/utils/clearMatchesNums';
+
 import Selector from '../../styled/selector/Selector';
 import NewGame from '../newGameSelector/NewGame';
-import { ReactComponentElement, useState } from 'react';
 import Button from '../../styled/button/Button';
-import { clearMatchesNums } from '../playfield/utils/clearMatchesNums';
 
 const Controls = () => {
     const [active, setActive] = useState<boolean>(false);
@@ -30,10 +26,7 @@ const Controls = () => {
     const solved = useSelector(selectSolved);
     const position = useSelector(selectPosition);
     const status = useSelector(selectGameStatus);
-
-    const handler = () => {
-        console.log('handling...');
-    }
+    const noteStatus = useSelector(selectNoteStatus);
 
     // get history length;
     // remove required param
@@ -55,6 +48,10 @@ const Controls = () => {
         }
     }
 
+    const handleNotes = () => {
+        dispatch(setNotesStatus(!noteStatus));
+    }
+
     const handleHint = () => {
         if (position && sudoku && solved) {
             const [r, c] = position;
@@ -72,6 +69,17 @@ const Controls = () => {
         setActive(!active);
     }
 
+    type TControl = {title: string; callback: Function; Icon: React.FC, active?: boolean};
+
+    const controls: TControl[] = useMemo(() => {
+        return [
+            {title: 'Undo', callback: handleUndo, Icon: Undo},
+            {title: 'Erase', callback: handleErase, Icon: Erase},
+            {title: 'Notes', callback: handleNotes,  Icon: Notes, active: noteStatus},
+            {title: 'Hint', callback: handleHint, Icon: Hint}
+        ]
+    }, [position, noteStatus])
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.ngButton}>
@@ -81,10 +89,9 @@ const Controls = () => {
                 </Selector>
             </div>
             <div className={styles.controls + ` ${status === 'finished' ? styles.disable : ''}`}>
-                <Control title='Undo' callback={handleUndo} Icon={Undo} />
-                <Control title='Erase' callback={handleErase} Icon={Erase} />
-                <Control title='Notes' callback={handler} Icon={Notes} />
-                <Control title='Hint' callback={handleHint} Icon={Hint} />
+                {controls.map(({title, callback, Icon, active}: TControl) => 
+                    <Control key={title} title={title} callback={callback} Icon={Icon} active={active} />
+                )}
             </div>
         </div>
     );
@@ -96,13 +103,20 @@ type TControl = {
     title: string;
     callback: Function;
     Icon: React.FunctionComponent;
+    active?: boolean | null;
 }
 
-const Control = ({title, callback, Icon}: TControl) => {
+const Control = ({title, callback, Icon, active = null}: TControl) => {
     return (
-        <div onClick={() => callback()} className={styles.control}>
+        <div onClick={() => callback()} className={styles.control + ` ${active ? styles.svgactive : ''}`}>
             <Icon />
             <span>{title}</span>
+            {active !== null 
+                ? <span className={styles.ctrlstatus + ` ${active ? styles.ctrlactive : styles.ctrldisable}`}>
+                    {active ? 'ON' : 'OFF'}
+                  </span>
+                : <></>
+            }
         </div>
     )
 }

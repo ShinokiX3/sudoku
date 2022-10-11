@@ -1,0 +1,29 @@
+.main {
+    position: relative;
+
+    color: white!important;
+    font-weight: initial;
+    
+    &::after {
+        content: '';
+
+        height: 3px;
+        width: 0px;
+        
+        background-color: #0072e3;
+        
+        position: absolute;
+        bottom: -10px;
+        left: -2px;
+
+        transition: width .4s ease;
+    }
+
+    &:hover {
+        background-color: transparent!important;
+
+        &::after {
+            width: calc(100% + 4px);
+        }
+    }
+}
