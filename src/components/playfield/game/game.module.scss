@@ -137,3 +137,17 @@ body[data-theme='dark'] {
         min-height: calc(var(--cell-min-height) + 6.5px);
     }
 }
+
+@media (max-width: 450px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 5px);
+        min-height: calc(var(--cell-min-height) - 5px);
+    }
+}
+
+@media (max-width: 400px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 10.5px);
+        min-height: calc(var(--cell-min-height) - 10.5px);
+    }
+}

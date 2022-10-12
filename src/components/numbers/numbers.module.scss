@@ -89,3 +89,16 @@ body[data-theme='dark'] {
         }
     }
 }
+
+@media (max-width: 450px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(9, 1fr);
+        grid-template-rows: none;
+
+        .field {
+            font-size: 40pt;
+            background-color: transparent;
+        }
+    }
+}

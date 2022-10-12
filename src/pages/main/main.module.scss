@@ -21,6 +21,7 @@
 .gameInfoWrapper {
     margin-bottom: 20px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
 }
@@ -68,6 +69,7 @@
     .plWrapper {
         grid-template-columns: 1fr;
     }
+
     .controls {
         width: 40vw;
     }
@@ -90,8 +92,47 @@
         padding-left: 13px;
         padding-right: 13px;
     }
+
     .cell {
         min-width: calc(var(--cell-min-width) + 5px);
         min-height: calc(var(--cell-min-height) + 5px);
+    }
+}
+
+@media (max-width: 450px) {
+    .gameInfoWrapper {
+        p {
+            font-size: 10pt!important;
+        }
+
+        div {
+            margin-right: 10px;
+        }
+
+        div:last-child {
+            margin-right: 0px;
+        }
+    }
+
+    .main {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .controls {
+        padding-left: 0;
+        width: calc(calc(var(--cell-min-width) + 8px) * 6.5);
+    }
+}
+
+@media (max-width: 400px) {
+    .main {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .controls {
+        padding-left: 0;
+        width: calc(calc(var(--cell-min-width) + 8px) * 6);
     }
 }

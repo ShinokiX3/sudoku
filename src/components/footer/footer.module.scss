@@ -103,3 +103,9 @@
         margin-bottom: 40px;
     }
 }
+
+@media (max-width: 400px) {
+    .links {
+        font-size: 10pt;
+    }   
+}
