@@ -138,6 +138,13 @@ body[data-theme='dark'] {
     }
 }
 
+@media (max-width: 500px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) + 4px);
+        min-height: calc(var(--cell-min-height) + 4px);
+    }
+}
+
 @media (max-width: 450px) {
     .cell {
         min-width: calc(var(--cell-min-width) - 5px);
@@ -149,5 +156,12 @@ body[data-theme='dark'] {
     .cell {
         min-width: calc(var(--cell-min-width) - 10.5px);
         min-height: calc(var(--cell-min-height) - 10.5px);
+    }
+}
+
+@media (max-width: 350px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) - 12px);
+        min-height: calc(var(--cell-min-height) - 12px);
     }
 }

@@ -99,6 +99,18 @@
     }
 }
 
+@media (max-width: 500px) {
+    .main {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .controls {
+        padding-left: 0;
+        width: calc(calc(var(--cell-min-width) + 8px) * 8);
+    }
+}
+
 @media (max-width: 450px) {
     .gameInfoWrapper {
         p {
@@ -106,7 +118,7 @@
         }
 
         div {
-            margin-right: 10px;
+            margin-right: 13px;
         }
 
         div:last-child {
@@ -127,12 +139,24 @@
 
 @media (max-width: 400px) {
     .main {
-        padding-left: 13px;
-        padding-right: 13px;
+        padding-left: 12px;
+        padding-right: 12px;
     }
 
     .controls {
         padding-left: 0;
         width: calc(calc(var(--cell-min-width) + 8px) * 6);
+    }
+}
+
+@media (max-width: 350px) {
+    .main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .controls {
+        padding-left: 0;
+        width: calc(calc(var(--cell-min-width) + 8px) * 5.5);
     }
 }

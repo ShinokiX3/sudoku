@@ -23,3 +23,9 @@
 .disable {
     pointer-events: none;
 }
+
+@media (max-width: 500px) {
+    .wrapper {
+        padding-right: 8px;
+    }
+}
