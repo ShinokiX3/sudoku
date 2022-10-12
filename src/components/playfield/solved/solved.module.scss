@@ -249,3 +249,31 @@
         height: calc(var(--cell-min-height) * 10.5);
     }
 }
+
+@media (max-width: 500px) {
+    .wrapper {
+        width: calc(var(--cell-min-width) * 9.5);
+        height: calc(var(--cell-min-height) * 9.5);
+    }
+}
+
+@media (max-width: 450px) {
+    .wrapper {
+        width: calc(var(--cell-min-width) * 8.5);
+        height: calc(var(--cell-min-height) * 8.5);
+    }
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        width: calc(var(--cell-min-width) * 7.5);
+        height: calc(var(--cell-min-height) * 7.5);
+    }
+}
+
+@media (max-width: 350px) {
+    .wrapper {
+        width: calc(var(--cell-min-width) * 6.5);
+        height: calc(var(--cell-min-height) * 6.5);
+    }
+}
