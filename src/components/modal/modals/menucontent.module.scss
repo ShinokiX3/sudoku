@@ -1,5 +1,8 @@
 .menu {
     img {
+        position: absolute;
+        top: 40px;
+        left: 40px;
         cursor: pointer;
         width: 18px;
         height: 18px;
@@ -7,6 +10,7 @@
 }
 
 .wrapper {
+    position: relative;
     padding: 20px;
     top: 0;
     width: calc(100vw - 30px);
