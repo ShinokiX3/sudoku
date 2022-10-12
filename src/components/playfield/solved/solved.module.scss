@@ -242,3 +242,10 @@
         }
     }
 }
+
+@media (max-width: 550px) {
+    .wrapper {
+        width: calc(var(--cell-min-width) * 10.5);
+        height: calc(var(--cell-min-height) * 10.5);
+    }
+}

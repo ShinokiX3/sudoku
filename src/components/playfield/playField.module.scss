@@ -21,3 +21,25 @@
 .selectedByUser {
     color: var(--cell-user-numpad-select)!important;
 }
+
+body[data-theme='dark'] {
+    .selected {
+        background-color: #ca8282!important;
+    }
+
+    .selectedByUser {
+        color: rgb(65, 65, 255);
+    }
+
+    .matches {
+        background-color: #df8b8b!important;
+    }
+    
+    .marked {
+        background-color: #d2b3b3!important;
+    }
+}
+
+.red {
+    color: red!important;
+}

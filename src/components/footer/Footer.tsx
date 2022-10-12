@@ -8,10 +8,10 @@ type Link = {
 }
 
 const links: Link[] = [
-    {title: 'Terms', url: '/terms'},
-    {title: 'Coockie Policy', url: '/coockie'},
-    {title: 'Privacy', url: '/privacy'},
-    {title: 'Get in Touch', url: '/getintouch'},
+    {title: 'Terms', url: '/'},
+    {title: 'Coockie Policy', url: '/'},
+    {title: 'Privacy', url: '/'},
+    {title: 'Get in Touch', url: '/'},
 ]
 
 const Footer = () => {

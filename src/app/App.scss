@@ -95,6 +95,10 @@ $dark-header-color: #313131;
     a:hover {
         background-color: $light-button-hover-color;
     }
+
+    h2 {
+        color: #344861;
+    }
 }
 
 @mixin dark_scheme() {
@@ -114,6 +118,10 @@ $dark-header-color: #313131;
 
     a:hover {
         background-color: $dark-button-hover-color;
+    }
+
+    h2 {
+        color: $dark-font-color;
     }
 
     border-color: $dark-border-color;

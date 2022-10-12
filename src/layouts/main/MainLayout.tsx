@@ -6,7 +6,13 @@ import styles from './mainlayout.module.scss';
 
 const MainLayout = () => {
     useEffect(() => {
-        document.querySelector('body')!.setAttribute('data-theme', 'light');
+        const theme = localStorage.getItem('theme');
+        if (theme) {
+            console.log(theme);
+            document.querySelector('body')!.setAttribute('data-theme', theme);
+        } else {
+            document.querySelector('body')!.setAttribute('data-theme', 'light');
+        }
     }, [])
 
     return (

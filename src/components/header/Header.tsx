@@ -40,6 +40,7 @@ const Header = () => {
 
     const handleTheme = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
+        localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
     }
 
     const handleNewGame = () => {

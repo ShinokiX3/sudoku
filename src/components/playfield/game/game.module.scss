@@ -82,6 +82,27 @@ body[data-theme='dark'] {
 
 }
 
+body[data-theme='dark'] {
+    .cell {
+        color: black;
+        border-color: rgb(72, 72, 72);
+    }
+
+    .borderBottom {
+        border-color: black;
+    }
+    
+    .borderRight {
+        border-color: black;
+    }
+
+    .marks {
+        p {
+            color: black;
+        }
+    }
+}
+
 @media (max-width: 1070px) {
     .cell {
         min-width: calc(var(--cell-min-width) - 0px);
@@ -107,5 +128,12 @@ body[data-theme='dark'] {
     .cell {
         min-width: calc(var(--cell-min-width) + 8px);
         min-height: calc(var(--cell-min-height) + 8px);
+    }
+}
+
+@media (max-width: 550px) {
+    .cell {
+        min-width: calc(var(--cell-min-width) + 6.5px);
+        min-height: calc(var(--cell-min-height) + 6.5px);
     }
 }

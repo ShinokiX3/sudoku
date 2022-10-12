@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrent, selectGameStatus, selectNoteStatus, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
+import { selectCurrent, selectGameStatus, selectMistakesAC, selectNoteStatus, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
 import { setCurrentField, setGameStatus, setPosition } from '../../../redux/field/slice';
 import { Field } from '../types';
 import styles from './game.module.scss';
@@ -24,6 +24,7 @@ const Game = () => {
     const numpad = useSelector(selectNumpad);
     const numpadHandle = useSelector(selectNumpadHandle);
     const noteStatus = useSelector(selectNoteStatus);
+    const mistakesAutoChek = useSelector(selectMistakesAC);
 
     useEffect(() => {
         if (position && !noteStatus) {
@@ -33,11 +34,23 @@ const Game = () => {
                 const sudokuCopy = createFieldCopy(sudoku);
 
                 sudokuCopy[r][c].marks = [];
-                sudokuCopy[r][c].value = sudokuCopy[r][c].value !== numpad ? numpad : 0;
+                // sudokuCopy[r][c].value = sudokuCopy[r][c].value !== numpad ? numpad : 0;
+
+                if (sudokuCopy[r][c].value !== numpad) {
+                    sudokuCopy[r][c].value = numpad;
+                    sudokuCopy[r][c].specialStyles = 'none';
+                } else {
+                    sudokuCopy[r][c].value = 0;
+                    sudokuCopy[r][c].specialStyles = 'none';
+                }
 
                 clearMarkedFields(sudokuCopy);
                 setMatchesNums(sudokuCopy, r, c);
                 setMarkedFields(sudokuCopy, r, c);
+
+                if (mistakesAutoChek && solved && sudokuCopy[r][c].value !== 0 && sudokuCopy[r][c].value !== solved[r][c]) {
+                    sudokuCopy[r][c].specialStyles = 'red';
+                }
 
                 // checkObviousMistakes(sudokuCopy, numpad, r, c);
                 
@@ -131,22 +144,23 @@ type TCell = {
 
 const Cell: React.FC<TCell> = ({cell, i, j, handleSelect}) => {
     const status = useSelector(selectGameStatus);
+    const mistakesAutoChek = useSelector(selectMistakesAC);
 
-    const { view, value, marks, type } = cell;
+    const { view, value, marks, specialStyles, type } = cell;
 
     return (
         <div key={j} onClick={(e) => handleSelect(e)} data-coord={`${i};${j}`}
-            className={styles.cell + ' ' + getRequireStyle(status === 'paused' ? '' : view) + ' ' + isUserSelect(type)}
+            className={styles.cell + ' ' + getRequireStyle(status === 'paused' ? '' : view) + ' ' + isUserSelect(type) + ' ' + (mistakesAutoChek ? getRequireStyle(specialStyles) : '')}
             style={checkIsBorder(j) ? {borderRight: '2px solid #344861'} : {}} 
         >
             {marks.length < 1 && (value === 0 || status === 'paused')
                 ? <></> 
                 : <div className={styles.value}>
-                    {value === 0 && marks.length > 0 
+                    {marks.length > 0 && value === 0 && status !== 'paused' 
                         ? <div className={styles.marks}>
-                            {marks.map(mark => <p>{mark}</p>)}
+                            {marks.map(mark => <p key={mark}>{mark}</p>)}
                           </div> 
-                        : value
+                        : status === 'paused' ? <></> : value
                     }
                   </div>
             }
