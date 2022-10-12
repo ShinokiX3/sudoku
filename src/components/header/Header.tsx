@@ -69,12 +69,15 @@ const Header = () => {
                     <Selector active={active} orientation='right'>
                         <NewGame setActive={setActive} />
                     </Selector>
+                    <div className={styles.theme} onClick={handleTheme}>
+                        <img src={dark} alt="theme" /> 
+                    </div>
                 </div>
                 
                 <nav>
                     {headerLinks.map(({title, path}: TLink) => <LinkButton key={title} path={path} title={title}/>)}
                     <div className={styles.theme} onClick={handleTheme}>
-                        <img src={dark} alt="light theme" /> 
+                        <img src={dark} alt="theme" /> 
                     </div>
                 </nav>
             </div>
