@@ -1,6 +1,6 @@
-import { Field } from "../types"
+import { TCell } from "../types"
 
-export const checkObviousMistakes = (sudoku: Field[][], numpad: number, r: number, c: number) => {
+export const checkObviousMistakes = (sudoku: TCell[][], numpad: number, r: number, c: number) => {
     const pX = r < 3 ? 0 : (r < 6 ? 3 : 6);
     const pY = c < 3 ? 0 : (c < 6 ? 3 : 6);
 

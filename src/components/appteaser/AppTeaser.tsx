@@ -1,9 +1,10 @@
-import React from 'react';
 import styles from './appteaser.module.scss';
 
-import app from '../../assets/images/icon-app.png';
-import apple from '../../assets/images/apple.png';
-import google from '../../assets/images/google.png';
+import app from '../../assets/images/advert/icon-app.png';
+import { apple, google } from '../../assets/images/social';
+
+const googleUrl = 'https://app.adjust.com/4j48k9v';
+const appleUrl = 'https://app.adjust.com/ver8rks';
 
 const AppTeaser = () => {
     return (
@@ -13,14 +14,14 @@ const AppTeaser = () => {
                 <div>
                     <p>Sudoku.com - Number Games</p>
                     <p className={styles.title}>Easybrain</p>
-                    <span>Stars</span>
+                    <span>★★★★★</span>
                 </div>
             </div>
             <div className={styles.links}>
-                <a href="https://app.adjust.com/4j48k9v">
+                <a href={googleUrl}>
                     <img src={google} alt="google" />
                 </a>
-                <a href="https://app.adjust.com/ver8rks">
+                <a href={appleUrl}>
                     <img src={apple} alt="apple" />
                 </a>
             </div>

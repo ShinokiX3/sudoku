@@ -1,13 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { TModal } from './types';
 import styles from './modal.module.scss';
 
-type TModal = {
-    children: React.ReactNode;
-    active: boolean;
-    setActive: Function;
-}
-
-const Modal: React.FunctionComponent<TModal> = ({ children, active, setActive }) => {
+const Modal: React.FC<TModal> = ({ children, active, setActive }) => {
     const handleActive = () => {
         setActive(!active)
     }

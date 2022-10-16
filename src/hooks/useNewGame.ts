@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
-import { setInitialSudoku } from '../components/playfield/utils/setInitialSudoku';
 import { setCurrentField, setDifficulty, setSolvedField, setToInitial } from '../redux/field/slice';
+import { setInitialSudoku } from '../components/playfield/utils/setInitialSudoku';
 
 const useNewGame = () => {
     const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const useNewGame = () => {
         }
 
         const [solvedSudoku, sudoku] = setInitialSudoku(gameDiff);
+        
         // TODO: Make payload optional
         
         dispatch(setToInitial(''));

@@ -1,4 +1,4 @@
-export type Field = {
+export type TCell = {
     value: number;
     marks: number[];
     type: 'initial' | 'user';

@@ -9,28 +9,28 @@ import Solved from './solved/Solved';
 import Game from './game/Game';
 import Paused from './paused/Paused';
 
-const PlayField: React.FunctionComponent = memo(() => {
+const PlayField: React.FC = memo(() => {
     const dispatch = useDispatch();
-
-    const [startNewGame] = useNewGame();
-
     const current = useSelector(selectCurrent);
     const status = useSelector(selectGameStatus);
 
+    const [startNewGame] = useNewGame();
+
     useEffect(() => {
-        if (!current && (localStorage.getItem('sudoku') === 'null' || !localStorage.getItem('sudoku'))) {
+        const lsSudoku = localStorage.getItem('sudoku'); 
+        if (!current && (lsSudoku=== 'null' || !lsSudoku)) {
             startNewGame('Hard');
-        } else if (!current && localStorage.getItem('sudoku') !== 'null') {
-            const sudoku = JSON.parse(localStorage.getItem('sudoku')!);
+        } else if (!current && lsSudoku !== 'null') {
+            const sudoku = JSON.parse(lsSudoku!);
             const solvedSudoku = JSON.parse(localStorage.getItem('solved')!);
-            // dispatch(setGameStatus('paused'));
             dispatch(setSolvedField(solvedSudoku));
             dispatch(setCurrentField(sudoku));
         }
     }, []);
 
+    // TODO: rewrite game view, temporary solution
+
     return (
-        // rewrite game view, temporary solution
         <div className={styles.wrapper}>
             {current 
                 ? <GameView status={status} />

@@ -1,18 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectMistakesAC } from '../../redux/field/selectors';
 import { setMistakesAC } from '../../redux/field/slice';
-import Swticher from '../../styled/switcher/Swticher';
+import { selectMistakesAC } from '../../redux/field/selectors';
 import styles from './mistakes.module.scss';
+
+import Swticher from '../../styled/switcher/Swticher';
 
 const Mistakes = () => {
     const dispatch = useDispatch();
     const mistakesACStatus = useSelector(selectMistakesAC);    
 
     useEffect(() => {
-        if (localStorage.getItem('mistakes') !== null) {
-            const mistakes = JSON.parse(localStorage.getItem('mistakes')!);
-            dispatch(setMistakesAC(mistakes));
+        const mistakes = localStorage.getItem('mistakes');
+        if (mistakes !== null) {
+            const mistakesAC = JSON.parse(mistakes!);
+            dispatch(setMistakesAC(mistakesAC));
         }
     }, []);
 

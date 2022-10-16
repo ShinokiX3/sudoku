@@ -1,24 +1,13 @@
 import { useEffect, useState } from 'react';
-import styles from './difficulty.module.scss';
-import Selector from '../../styled/selector/Selector';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectDifficult } from '../../redux/field/selectors';
 import { setDifficulty } from '../../redux/field/slice';
+import { selectDifficult } from '../../redux/field/selectors';
+import styles from './difficulty.module.scss';
+
 import useNewGame from '../../hooks/useNewGame';
+import Selector from '../../styled/selector/Selector';
 
-// TODO: get from global state
-type Diff = {
-    title: string
-}
-
-const diffs: Diff[] = [
-    {title: 'Easy'},
-    {title: 'Medium'},
-    {title: 'Hard'},
-    {title: 'Expert'},
-    {title: 'Evil'},
-
-]
+import { difficulties } from './difficulties'; 
 
 const Difficulty = () => {
     const dispatch = useDispatch();
@@ -26,18 +15,13 @@ const Difficulty = () => {
 
     const [startNewGame] = useNewGame();
     
-    const [active, setActive] = useState<boolean>(false);
     // TODO: get value from global state
-    const [value, setValue] = useState<string>('Hard');
+    const [active, setActive] = useState<boolean>(false);
 
     useEffect(() => {
         const difficult = localStorage.getItem('difficult');
-        dispatch(setDifficulty(difficult));
+        if (difficult && difficult !== null) dispatch(setDifficulty(difficult));
     }, []);
-
-    useEffect(() => {
-        setValue(difficult);
-    }, [difficult])
 
     const handleSelector = () => {
         setActive(!active);
@@ -45,17 +29,16 @@ const Difficulty = () => {
 
     const handleDifficult = (value: string) => {
         startNewGame(value);
-        setValue(value);
     }
 
     return (
         <div className={styles.wrapper}>
             <p className={styles.title}>Difficulty:</p>
             <div onClick={handleSelector} className={styles.value}>
-                <p>{value}</p>
+                <p>{difficult}</p>
                 <Selector active={active}>
                     <div className={styles.content}>
-                        {diffs.map(({title}) => 
+                        {difficulties.map(({title}) => 
                             <div key={title} onClick={() => handleDifficult(title)} className={styles.item}>
                                 {title}
                             </div>

@@ -21,7 +21,9 @@ const fieldSlice = createSlice({
     reducers: {
         setCurrentField(state, action) {
             state.current = action.payload;
-            state.history = state.history ? [...state.history, action.payload] : [action.payload];
+            state.history = state.history 
+                ? [...state.history, action.payload] 
+                : [action.payload];
         },
         setSolvedField(state, action) {
             state.solved = action.payload;

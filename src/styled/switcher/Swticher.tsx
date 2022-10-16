@@ -1,5 +1,5 @@
 import styles from './switcher.module.scss';
-import mistakes from '../../assets/images/mistakes.png';
+import mistakes from '../../assets/images/game/mistakes.png';
 
 const Swticher = ({active, setActive}: {active: boolean, setActive: Function}) => {
     const handleSlider = () => {

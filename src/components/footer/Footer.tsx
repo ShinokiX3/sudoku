@@ -1,17 +1,13 @@
+import { TLink } from '../header/types';
 import styles from './footer.module.scss';
-import facebook from '../../assets/svg/facebook.svg';
+import facebook from '../../assets/svg/social/facebook.svg';
 import InfoButton from '../../styled/infoButton/InfoButton';
 
-type Link = {
-    title: string;
-    url: string;
-}
-
-const links: Link[] = [
-    {title: 'Terms', url: '/'},
-    {title: 'Coockie Policy', url: '/'},
-    {title: 'Privacy', url: '/'},
-    {title: 'Get in Touch', url: '/'},
+const links: TLink[] = [
+    {title: 'Terms', path: '/'},
+    {title: 'Coockie Policy', path: '/'},
+    {title: 'Privacy', path: '/'},
+    {title: 'Get in Touch', path: '/'},
 ]
 
 const Footer = () => {
@@ -24,7 +20,7 @@ const Footer = () => {
                         <span className={styles.rights}>©2018-2022 Easybrain. All Rights Reserved.</span>
                     </div>
                     <div className={styles.links}>
-                        {links.map(({ title, url }: Link) => <InfoButton key={title} title={title} url={url} />)}
+                        {links.map(({ title, path }: TLink) => <InfoButton key={title} title={title} path={path} />)}
                     </div>
                     <div className={styles.socials}>
                         <img src={facebook} alt="facebook" />

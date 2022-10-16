@@ -1,14 +1,10 @@
 import React from 'react';
-import styles from './menucontent.module.scss';
-import close from '../../../assets/images/close.png';
+import { TModal } from '../../types';
+import styles from './menu.module.scss';
 
-type TModalContent = {
-    children: React.ReactNode;
-    active: boolean;
-    setActive: Function;
-}
+import { close } from '../../../../assets/images/menu';
 
-const MenuContent: React.FunctionComponent<TModalContent> = ({ children, active, setActive }) => {
+const MenuContent: React.FC<TModal> = ({ children, active, setActive }) => {
     const handleMenu = () => {
         setActive(!active);
         document.body!.style.overflow = 'auto';

@@ -1,6 +1,6 @@
-import { Field } from "../types";
+import { TCell } from "../types";
 
-export const setMarkedFields = (sudokuCopy: Field[][], i: number, j: number) => {
+export const setMarkedFields = (sudokuCopy: TCell[][], i: number, j: number) => {
     const pX = i < 3 ? 0 : (i < 6 ? 3 : 6);
     const pY = j < 3 ? 0 : (j < 6 ? 3 : 6);
 

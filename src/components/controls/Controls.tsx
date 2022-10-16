@@ -2,19 +2,17 @@ import React, { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentField, setNotesStatus, undoField } from '../../redux/field/slice';
 import { selectCurrent, selectGameStatus, selectNoteStatus, selectPosition, selectSolved } from '../../redux/field/selectors';
+import { TControl } from './types';
 import styles from './controls.module.scss';
 
-import { ReactComponent as Undo } from '../../assets/svg/undo.svg';
-import { ReactComponent as Erase } from '../../assets/svg/erase.svg';
-import { ReactComponent as Notes } from '../../assets/svg/notes.svg';
-import { ReactComponent as Hint } from '../../assets/svg/hint.svg';
+import { Undo, Erase, Notes, Hint } from '../../assets/svg/controls';
 
 import { createFieldCopy } from '../playfield/utils/createFieldCopy';
 import { setMatchesNums } from '../playfield/utils/setMatchesNums';
 import { clearMatchesNums } from '../playfield/utils/clearMatchesNums';
 
 import Selector from '../../styled/selector/Selector';
-import NewGame from '../newGameSelector/NewGame';
+import NewGame from '../newgame/NewGame';
 import Button from '../../styled/button/Button';
 
 const Controls = () => {
@@ -28,7 +26,7 @@ const Controls = () => {
     const status = useSelector(selectGameStatus);
     const noteStatus = useSelector(selectNoteStatus);
 
-    // get history length;
+    // TODO: get history length;
     // remove required param
 
     const handleUndo = () => {
@@ -69,16 +67,14 @@ const Controls = () => {
         setActive(!active);
     }
 
-    type TControl = {title: string; callback: Function; Icon: React.FC, active?: boolean};
-
     const controls: TControl[] = useMemo(() => {
         return [
-            {title: 'Undo', callback: handleUndo, Icon: Undo},
-            {title: 'Erase', callback: handleErase, Icon: Erase},
+            {title: 'Undo', callback: handleUndo, Icon: Undo, active: null},
+            {title: 'Erase', callback: handleErase, Icon: Erase, active: null},
             {title: 'Notes', callback: handleNotes,  Icon: Notes, active: noteStatus},
-            {title: 'Hint', callback: handleHint, Icon: Hint}
+            {title: 'Hint', callback: handleHint, Icon: Hint, active: null}
         ]
-    }, [position, noteStatus])
+    }, [position, noteStatus]);
 
     return (
         <div className={styles.wrapper}>
@@ -89,24 +85,17 @@ const Controls = () => {
                 </Selector>
             </div>
             <div className={styles.controls + ` ${status === 'finished' ? styles.disable : ''}`}>
-                {controls.map(({title, callback, Icon, active}: TControl) => 
-                    <Control key={title} title={title} callback={callback} Icon={Icon} active={active} />
+                {controls.map((control, i) => 
+                    <Control key={i} control={control} />
                 )}
             </div>
         </div>
     );
 };
 
-// need to set type for callback
+const Control: React.FC<{control: TControl}> = ({ control }) => {
+    const { title, callback, Icon, active } = control;
 
-type TControl = {
-    title: string;
-    callback: Function;
-    Icon: React.FunctionComponent;
-    active?: boolean | null;
-}
-
-const Control = ({title, callback, Icon, active = null}: TControl) => {
     return (
         <div onClick={() => callback()} className={styles.control + ` ${active ? styles.svgactive : ''}`}>
             <Icon />

@@ -1,26 +1,37 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrent, selectGameStatus, selectMistakesAC, selectNoteStatus, selectNumpad, selectNumpadHandle, selectPosition, selectSolved } from '../../../redux/field/selectors';
 import { setCurrentField, setGameStatus, setPosition } from '../../../redux/field/slice';
-import { Field } from '../types';
+
+import { 
+    selectCurrent, 
+    selectGameStatus, 
+    selectMistakesAC, 
+    selectNoteStatus, 
+    selectNumpad, 
+    selectNumpadHandle, 
+    selectPosition, 
+    selectSolved 
+} from '../../../redux/field/selectors';
+
+import { TCell } from '../types';
 import styles from './game.module.scss';
 
-import { checkIsBorder } from '../utils/checkIsBorder';
-import { checkStatus } from '../utils/checkStatus';
-import { clearMarkedFields } from '../utils/clearMarkedFields';
-import { createFieldCopy } from '../utils/createFieldCopy';
-import { getRequireStyle } from '../utils/getRequireStyle';
-import { isUserSelect } from '../utils/isUserSelect';
-import { setMarkedFields } from '../utils/setMarkedFields';
-import { setMatchesNums } from '../utils/setMatchesNums';
-import { checkObviousMistakes } from '../utils/checkObviousMistakes';
+import { 
+    checkIsBorder,
+    checkStatus,
+    clearMarkedFields,
+    createFieldCopy,
+    getRequireStyle,
+    isUserSelect,
+    setMarkedFields,
+    setMatchesNums
+} from '../utils';
 
 const Game = () => {
     const dispatch = useDispatch();
     const solved = useSelector(selectSolved);
     const sudoku = useSelector(selectCurrent);
     const position = useSelector(selectPosition);
-
     const numpad = useSelector(selectNumpad);
     const numpadHandle = useSelector(selectNumpadHandle);
     const noteStatus = useSelector(selectNoteStatus);
@@ -32,9 +43,8 @@ const Game = () => {
 
             if (sudoku && numpad && numpad !== 0 && sudoku[r][c].type === 'user') {
                 const sudokuCopy = createFieldCopy(sudoku);
-
+                
                 sudokuCopy[r][c].marks = [];
-                // sudokuCopy[r][c].value = sudokuCopy[r][c].value !== numpad ? numpad : 0;
 
                 if (sudokuCopy[r][c].value !== numpad) {
                     sudokuCopy[r][c].value = numpad;
@@ -51,8 +61,6 @@ const Game = () => {
                 if (mistakesAutoChek && solved && sudokuCopy[r][c].value !== 0 && sudokuCopy[r][c].value !== solved[r][c]) {
                     sudokuCopy[r][c].specialStyles = 'red';
                 }
-
-                // checkObviousMistakes(sudokuCopy, numpad, r, c);
                 
                 const status = sudokuCopy && solved ? checkStatus(sudokuCopy, solved) : true;
                 if (status) dispatch(setGameStatus('finished'));
@@ -60,7 +68,6 @@ const Game = () => {
             }
 
         } else if (position && noteStatus) {
-            console.log(noteStatus);
             const [r, c] = position;
 
             if (sudoku && numpad && numpad !== 0 && sudoku[r][c].type === 'user') {
@@ -82,8 +89,9 @@ const Game = () => {
     useEffect(() => {
         if (sudoku) {
             const currentJSON = JSON.stringify(sudoku);
+            const lsSolved = localStorage.getItem('solved');
             localStorage.setItem('sudoku', currentJSON);
-            if (localStorage.getItem('solved') === 'null' || !localStorage.getItem('solved')) {
+            if (lsSolved === 'null' || !lsSolved) {
                 const solvedJSON = JSON.stringify(solved);
                 localStorage.setItem('solved', solvedJSON);
             }
@@ -94,9 +102,11 @@ const Game = () => {
         const target = (e.target as HTMLDivElement);
         const [i, j]: number[] = target.getAttribute('data-coord')?.split(';').map(el => +el)!;
 
+        // TODO: compose functions
+
         if (sudoku) {
-            // TODO: compose functions
             const sudokuCopy = createFieldCopy(sudoku);
+
             clearMarkedFields(sudokuCopy);
             setMarkedFields(sudokuCopy, i, j);
             setMatchesNums(sudokuCopy, i, j);
@@ -120,7 +130,7 @@ const Game = () => {
 };
 
 type TRow = {
-    row: Field[], 
+    row: TCell[], 
     i: number, 
     handleSelect: Function
 }
@@ -135,22 +145,22 @@ const Row: React.FC<TRow> = ({row, i, handleSelect}) => {
     )
 }
 
-type TCell = {
-    cell: Field;
+type TCellProps = {
+    cell: TCell;
     i: number;
     j: number;
     handleSelect: Function;
 }
 
-const Cell: React.FC<TCell> = ({cell, i, j, handleSelect}) => {
+const Cell: React.FC<TCellProps> = ({cell, i, j, handleSelect}) => {
     const status = useSelector(selectGameStatus);
-    const mistakesAutoChek = useSelector(selectMistakesAC);
+    const mistakesAutoCheck = useSelector(selectMistakesAC);
 
     const { view, value, marks, specialStyles, type } = cell;
 
     return (
         <div key={j} onClick={(e) => handleSelect(e)} data-coord={`${i};${j}`}
-            className={styles.cell + ' ' + getRequireStyle(status === 'paused' ? '' : view) + ' ' + isUserSelect(type) + ' ' + (mistakesAutoChek ? getRequireStyle(specialStyles) : '')}
+            className={styles.cell + ' ' + getRequireStyle(status === 'paused' ? '' : view) + ' ' + isUserSelect(type) + ' ' + (mistakesAutoCheck ? getRequireStyle(specialStyles) : '')}
             style={checkIsBorder(j) ? {borderRight: '2px solid #344861'} : {}} 
         >
             {marks.length < 1 && (value === 0 || status === 'paused')

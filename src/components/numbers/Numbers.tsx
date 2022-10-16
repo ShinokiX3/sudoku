@@ -1,24 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGameStatus, selectNoteStatus } from '../../redux/field/selectors';
 import { setNumpad } from '../../redux/field/slice';
+import { selectGameStatus } from '../../redux/field/selectors';
 import styles from './numbers.module.scss';
 
-const arr: number[] = Array.from({length: 9}, (_, i) => i + 1);
+const numbers: number[] = Array.from({length: 9}, (_, i) => i + 1);
 
 const Numbers = () => {
     const dispatch = useDispatch();
     const status = useSelector(selectGameStatus);
-    const noteStatus = useSelector(selectNoteStatus);
 
-    const handleNumpad = (num: number) => {
-        dispatch(setNumpad(num));
+    const handleNumpad = (number: number) => {
+        dispatch(setNumpad(number));
     }
 
     return (
         <div className={styles.wrapper + ` ${status === 'finished' ? styles.disable : ''}`}>
-            {arr.map((num) => 
-                <div key={num} className={styles.field} onClick={() => handleNumpad(num)}>
-                    {num}
+            {numbers.map((number) => 
+                <div key={number} className={styles.field} onClick={() => handleNumpad(number)}>
+                    {number}
                 </div>
             )}
         </div>

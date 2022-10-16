@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import play from '../../assets/images/play.png';
-import pause from '../../assets/images/pause.png';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGameStatus, selectTime } from '../../redux/field/selectors';
-import styles from './timer.module.scss';
 import { setGameStatus, setTime } from '../../redux/field/slice';
-import { formateTime } from './utils/formateTime';
+import { selectGameStatus, selectTime } from '../../redux/field/selectors';
 import { TTimer } from './types';
+import styles from './timer.module.scss';
+
+import { play, pause } from '../../assets/images/game';
+import { formateTime } from './utils/formateTime';
 
 const Timer = () => {
     const [clock, setClock] = useState<TTimer>({minutes: 0, seconds: 0});
@@ -40,6 +40,7 @@ const Timer = () => {
         }, 1000);
         
         if (status === 'paused') clearInterval(intervalId);
+
         if (status === 'finished') {
             clearInterval(intervalId);
             dispatch(setTime(clock));
@@ -55,7 +56,7 @@ const Timer = () => {
     }
 
     return (
-        <div className={styles.wrapper + ` ${status === 'finished' ? styles.disable : ''}`} onClick={handleGameStatus}>
+        <div onClick={handleGameStatus} className={styles.wrapper + ` ${status === 'finished' ? styles.disable : ''}`}>
             <p>{formateTime(clock)}</p>
             <img src={status === 'acting' ? play : pause} alt="play" />
         </div>

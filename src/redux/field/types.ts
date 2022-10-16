@@ -1,10 +1,10 @@
-import { Field } from "../../components/playfield/types";
+import { TCell } from "../../components/playfield/types";
 import { TTimer } from "../../components/timer/types";
 
 export interface FieldSliceState {
     position: number[] | null;
-    history: Array<Field[][]> | null;
-    current: Field[][] | null;
+    history: Array<TCell[][]> | null;
+    current: TCell[][] | null;
     solved: number[][] | null;
     numpad: number | null;
     clock: TTimer;

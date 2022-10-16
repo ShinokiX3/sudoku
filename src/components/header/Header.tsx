@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TLink } from './types';
 import styles from './header.module.scss';
 
+import logo from '../../assets/svg/branding/logo.svg';
+import dark from '../../assets/svg/theme/dark.svg';
+import facebook from '../../assets/svg/social/facebook.svg';
+import { open } from '../../assets/images/menu';
+
 import LinkButton from '../../styled/linkButton/LinkButton';
-import logo from '../../assets/svg/logo.svg';
-import dark from '../../assets/svg/dark.svg';
 import Selector from '../../styled/selector/Selector';
-import NewGame from '../newGameSelector/NewGame';
+import NewGame from '../newgame/NewGame';
 
-
-import facebook from '../../assets/svg/facebook.svg';
-import open from '../../assets/images/open.png';
 import Modal from '../modal/Modal';
-import MenuContent from '../modal/modals/MenuContent';
-
-type TLink = {
-    title: string;
-    path: string;
-}
+import Menu from '../modal/modals/menu/Menu';
 
 const headerLinks: TLink[] = [
     {title: 'Event', path: '/event'},
@@ -60,7 +56,7 @@ const Header = () => {
                         <img src={open} alt={'open'}/>
                     </div>
                     <Link to='/'>
-                        <img src={logo} alt="sudoku web-app main page  " />
+                        <img src={logo} alt="sudoku web-app main page" />
                     </Link>
                 </div>
 
@@ -83,12 +79,12 @@ const Header = () => {
             </div>
             {menuActive 
                 ? <Modal active={menuActive} setActive={setMenuActive}>
-                    <MenuContent active={menuActive} setActive={setMenuActive}>
-                        <div style={{display: 'flex', flexDirection: 'column', fontSize: '13pt'}}>
+                    <Menu active={menuActive} setActive={setMenuActive}>
+                        <div className={styles.menuLinks}>
                             {headerLinks.map(({title, path}: TLink) => <LinkButton key={title} path={path} title={title}/>)}
                             <img src={facebook} alt="facebook" />
                         </div>
-                    </MenuContent>
+                    </Menu>
                   </Modal> 
                 : <></>
             }

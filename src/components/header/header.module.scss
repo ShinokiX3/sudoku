@@ -50,6 +50,12 @@
     display: none;
 }
 
+.menuLinks {
+    display: flex; 
+    flex-direction: column; 
+    font-size: 13pt;
+}
+
 .newGame {
     display: none;
     justify-self: end;

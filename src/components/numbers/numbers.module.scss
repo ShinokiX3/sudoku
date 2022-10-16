@@ -8,6 +8,7 @@ body[data-theme='dark'] {
     .field {
         color: black;
         background-color: var(--cell-background-dark);
+
         &:hover {
             background-color: var(--basic-backgr-selected-dark);
         }
@@ -59,6 +60,7 @@ body[data-theme='dark'] {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
     }
+
     .field {
         min-width: auto;
         min-height: 77px;
@@ -71,6 +73,7 @@ body[data-theme='dark'] {
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
     }
+    
     .field {
         min-width: auto;
         min-height: 82px;

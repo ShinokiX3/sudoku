@@ -1,9 +1,9 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setGameStatus } from '../../../redux/field/slice';
 import styles from './paused.module.scss';
+
+import { circle } from '../../../assets/svg/controls';
 import Game from '../game/Game';
-import circle from '../../../assets/svg/circle.svg';
 
 const Paused = () => {
     const dispatch = useDispatch();

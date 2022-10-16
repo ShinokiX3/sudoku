@@ -1,13 +1,13 @@
 import React, { ReactNode } from 'react';
 import styles from './selector.module.scss';
 
-type SelectorProps = {
+type TSelectorProps = {
     children: ReactNode;
     active: boolean;
     orientation?: 'left' | 'right';
 }
 
-const Selector: React.FunctionComponent<SelectorProps> = ({ children, active, orientation = 'left' }) => {
+const Selector: React.FC<TSelectorProps> = ({ children, active, orientation = 'left' }) => {
     const setOrientation = (orientation: string): string => {
         switch(orientation) {
             case 'left': return styles.left;

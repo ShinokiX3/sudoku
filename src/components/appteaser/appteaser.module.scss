@@ -51,6 +51,7 @@
     .info {
         flex-direction: column;
     }
+    
     .links {
         grid-template-columns: 1fr;
     }
@@ -62,9 +63,11 @@
         justify-content: space-between;
         max-width: 100%;
     }
+
     .info {
         flex-direction: row;
     }
+
     .links {
         grid-template-columns: 1fr 1fr;
     }
@@ -77,6 +80,7 @@
         align-items: center;
         max-width: 100%;
     }
+
     .info {
         flex-direction: row;
         margin-left: 5px;
@@ -84,6 +88,7 @@
             margin-left: 5px;
         }
     }
+
     .links {
         margin-top: 0;
         grid-template-columns: 1fr;
