@@ -15,3 +15,5 @@ Hints and Checks: If you get stuck in the game, Sudoku Solver provides hints and
 Save and Load: You can save the current state of your game and load it later to continue solving or playing.
 
 Responsive Design: The application is designed to work on various devices, including desktops, tablets, and smartphones.
+
+Does not pretend to be commercial project. View design taken from https://sudoku.com/.
