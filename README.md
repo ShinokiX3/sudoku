@@ -17,3 +17,13 @@ Save and Load: You can save the current state of your game and load it later to 
 Responsive Design: The application is designed to work on various devices, including desktops, tablets, and smartphones.
 
 Does not pretend to be commercial project. View design taken from https://sudoku.com/.
+
+# Preview
+
+![main](https://github.com/ShinokiX3/sudoku/assets/68112402/92a048a2-66b7-45b3-834f-386cefde1adf)
+##
+![dark](https://github.com/ShinokiX3/sudoku/assets/68112402/ea305c12-1f1d-41ed-b3d9-32ca17918e18)
+##
+![pause](https://github.com/ShinokiX3/sudoku/assets/68112402/b9ea4d1b-6683-41b6-9b2f-67917572ce8e)
+##
+![graz](https://github.com/ShinokiX3/sudoku/assets/68112402/ac850c28-d8a1-4e1e-a8b7-7f1e52d5e3e1)
