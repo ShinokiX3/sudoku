@@ -27,3 +27,5 @@ Does not pretend to be commercial project. View design taken from https://sudoku
 ![pause](https://github.com/ShinokiX3/sudoku/assets/68112402/b9ea4d1b-6683-41b6-9b2f-67917572ce8e)
 ##
 ![graz](https://github.com/ShinokiX3/sudoku/assets/68112402/ac850c28-d8a1-4e1e-a8b7-7f1e52d5e3e1)
+##
+![new game](https://github.com/ShinokiX3/sudoku/assets/68112402/9dbf08b5-a4ae-4da3-bed4-0c3e4ce59585)
